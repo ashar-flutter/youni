@@ -1,0 +1,28 @@
+class AppImage {
+
+  // all images
+  static const String appBackground = "assets/images/app_background.png";
+  static const String universe= "assets/images/universe.png";
+
+  // all icons
+  static const String quoteIcon = "assets/icons/quote_icon.png";
+  static const String audioCallIcon ="assets/icons/audio_call.png";
+  static const String chatIcon ="assets/icons/chat.png";
+  static const String crownIcon ="assets/icons/king_crown.png";
+  static const String robotIcon ="assets/icons/robot.png";
+  static const String starIcon ="assets/icons/star.png";
+  static const String  videoCallIcon ="assets/icons/video_call.png";
+
+
+
+  // all logos
+  static const String youniLogo = "assets/logos/youni_logo.png";
+
+  static const String apple= "assets/logos/apple_logo.png";
+  static const String facebook= "assets/logos/fb.png";
+  static const String google= "assets/logos/google_logo.png";
+  static const String instagram= "assets/logos/insta.png";
+  static const String x = "assets/logos/X.png";
+
+
+}
