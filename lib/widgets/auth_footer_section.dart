@@ -10,9 +10,7 @@ class AuthFooterSection extends StatelessWidget {
         // OR Separator Line
         Row(
           children: [
-            Expanded(
-              child: Container(height: 1, color: AppColors.white),
-            ),
+            Expanded(child: Container(height: 1, color: AppColors.white)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w),
               child: CustomText(
@@ -22,9 +20,7 @@ class AuthFooterSection extends StatelessWidget {
                 color: AppColors.white,
               ),
             ),
-            Expanded(
-              child: Container(height: 1, color: AppColors.white),
-            ),
+            Expanded(child: Container(height: 1, color: AppColors.white)),
           ],
         ),
 
@@ -47,13 +43,46 @@ class AuthFooterSection extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Center(child: _FooterLink(text: 'Terms & Conditions')),
+              child: Center(
+                child: _FooterLink(
+                  text: 'Terms & Conditions',
+                  onTap: () {
+                    Get.to(
+                      () => const TermsAndConditions(),
+                      transition: Transition.fadeIn,
+                      duration: const Duration(milliseconds: 300),
+                    );
+                  },
+                ),
+              ),
             ),
             Expanded(
-              child: Center(child: _FooterLink(text: 'Privacy Policy')),
+              child: Center(
+                child: _FooterLink(
+                  text: 'Privacy Policy',
+                  onTap: () {
+                    Get.to(
+                      () => const PrivacyPolicy(),
+                      transition: Transition.fadeIn,
+                      duration: const Duration(milliseconds: 300),
+                    );
+                  },
+                ),
+              ),
             ),
             Expanded(
-              child: Center(child: _FooterLink(text: 'Contact Us')),
+              child: Center(
+                child: _FooterLink(
+                  text: 'Contact Us',
+                  onTap: () {
+                    Get.to(
+                      () => const ContactUs(),
+                      transition: Transition.fadeIn,
+                      duration: const Duration(milliseconds: 300),
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),
@@ -64,13 +93,14 @@ class AuthFooterSection extends StatelessWidget {
 
 class _FooterLink extends StatelessWidget {
   final String text;
+  final VoidCallback onTap;
 
-  const _FooterLink({required this.text});
+  const _FooterLink({required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return onTap(
-      onTap: () {},
+    return GestureDetector(
+      onTap: onTap,
       child: CustomText(
         text,
         fontSize: 13.5.sp,

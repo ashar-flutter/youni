@@ -11,10 +11,11 @@ class AppColors {
   static const Color magentaOverlay = Color(0x66861043);
   static const Color gold = Color(0xFFF0B100);
   static const Color blue = Color(0xFF167EE6);
-
+  static const Color lightBlue = Color(0xCCBEDBFF);
   static const Color greyDark = Color(0xFF454545);
   static const Color greyLight = Color(0xFFD5D7DA);
   static const Color black05 = Color(0x0D0A0D12);
   static const Color greyMedium = Color(0xFF717680);
   static const Color dark = Color(0xFF111111);
+  static const Color darkBackground = Color(0xFF16161C);
 }

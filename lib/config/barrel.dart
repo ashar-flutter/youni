@@ -18,6 +18,9 @@ export 'package:youni/auth/register.dart';
 export 'package:youni/auth/reset_password.dart';
 export 'package:youni/auth/reset_password_sent.dart';
 export 'package:youni/auth/new_password.dart';
+export 'package:youni/pages/terms_and_conditions.dart';
+export 'package:youni/pages/privacy_policy.dart';
+export 'package:youni/pages/contact_us.dart';
 
 
 //google fonts
@@ -36,4 +39,5 @@ export 'package:youni/widgets/app_text_field.dart';
 export 'package:youni/widgets/auth_header.dart';
 export 'package:youni/widgets/social_row.dart';
 export 'package:youni/widgets/auth_footer_section.dart';
+export 'package:youni/widgets/legal_page_app_bar.dart';
 

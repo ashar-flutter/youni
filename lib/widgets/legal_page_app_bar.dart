@@ -1,0 +1,74 @@
+import '../config/barrel.dart';
+
+class LegalPageAppBar extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const LegalPageAppBar({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 3.h),
+        Padding(
+          padding: EdgeInsets.only(left: 1.w),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              onTap(
+                onTap: () => Get.back(),
+                child: Container(
+                  width: 8.w,
+                  height: 8.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.white.withValues(alpha: 0.06),
+                    border: Border.all(
+                      color: AppColors.white.withValues(alpha: 0.15),
+                      width: 1,
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    size: 3.w,
+                    color: AppColors.white,
+                  ),
+                ),
+              ),
+              SizedBox(width: 3.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(title, fontSize: 18.sp),
+                    SizedBox(height: 0.9.h),
+                    CustomText(
+                      subtitle,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.white.withValues(alpha: 0.5),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 4.h),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 3.w),
+          height: 2,
+          width: double.infinity,
+          color: AppColors.white.withValues(alpha: 0.11),
+        ),
+        SizedBox(height: 2.h),
+
+      ],
+    );
+  }
+}
