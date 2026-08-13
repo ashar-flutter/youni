@@ -1,4 +1,4 @@
-import '../config/barrel.dart';
+import '../../config/barrel.dart';
 
 class ResetPasswordSent extends StatelessWidget {
   final String email;

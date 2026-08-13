@@ -13,6 +13,13 @@ class AppImage {
   static const String starIcon ="assets/icons/star.png";
   static const String  videoCallIcon ="assets/icons/video_call.png";
 
+  // navigation bar icons
+  static const String globalIcon = "assets/icons/global_icon.png";
+  static const String checkBoxIcon = "assets/icons/check_icon.png";
+  static const String draftIcon = "assets/icons/draft_icon.png";
+  static const String boxIcon = "assets/icons/box_icon.png";
+  static const String itemFiveIcon = "assets/icons/item_five.png";
+
 
 
   // all logos

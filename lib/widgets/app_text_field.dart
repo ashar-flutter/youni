@@ -8,6 +8,7 @@ class AppTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final BoxConstraints? prefixIconConstraints;
   final double? height;
   final double? borderRadius;
   final Color? borderColor;
@@ -18,6 +19,7 @@ class AppTextField extends StatefulWidget {
   final TextStyle? labelStyle;
   final TextStyle? textStyle;
   final Color? hintColor;
+  final Color? fillColor;
   final Color? labelColor;
   final Color? textColor;
   final EdgeInsetsGeometry? contentPadding;
@@ -35,12 +37,14 @@ class AppTextField extends StatefulWidget {
   const AppTextField({
     super.key,
     this.hintText,
+    this.fillColor,
     this.labelText,
     this.controller,
     this.obscureText = false,
     this.keyboardType,
     this.prefixIcon,
     this.suffixIcon,
+    this.prefixIconConstraints,
     this.height,
     this.borderRadius,
     this.borderColor,
@@ -120,8 +124,7 @@ class _AppTextFieldState extends State<AppTextField> {
             textInputAction: widget.textInputAction,
             focusNode: _focusNode,
             autofocus: widget.autofocus ?? false,
-            style:
-            widget.textStyle ??
+            style: widget.textStyle ??
                 TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
@@ -129,22 +132,31 @@ class _AppTextFieldState extends State<AppTextField> {
                 ),
             decoration: InputDecoration(
               hintText: widget.hintText,
-              hintStyle:
-              widget.hintStyle ??
+              hintStyle: widget.hintStyle ??
                   TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
                     color: widget.hintColor ?? AppColors.greyMedium,
                   ),
+
               prefixIcon: widget.prefixIcon != null
                   ? IconTheme(
-                data: IconThemeData(color: AppColors.white, size: 20.sp),
+                data: IconThemeData(
+                  color: AppColors.white,
+                  size: 20.sp,
+                ),
                 child: widget.prefixIcon!,
               )
                   : null,
+
+              prefixIconConstraints: widget.prefixIconConstraints,
+
               suffixIcon: widget.obscureText == true
                   ? IconTheme(
-                data: IconThemeData(color: AppColors.white, size: 20.sp),
+                data: IconThemeData(
+                  color: AppColors.white,
+                  size: 20.sp,
+                ),
                 child: IconButton(
                   icon: Icon(
                     _obscureText
@@ -164,26 +176,38 @@ class _AppTextFieldState extends State<AppTextField> {
               )
                   : widget.suffixIcon != null
                   ? IconTheme(
-                data: IconThemeData(color: AppColors.white, size: 20.sp),
+                data: IconThemeData(
+                  color: AppColors.white,
+                  size: 20.sp,
+                ),
                 child: widget.suffixIcon!,
               )
                   : null,
-              contentPadding:
-              widget.contentPadding ??
-                  EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.5.h),
+
+              contentPadding: widget.contentPadding ??
+                  EdgeInsets.symmetric(
+                    horizontal: 4.w,
+                    vertical: 1.5.h,
+                  ),
+
               filled: true,
-              fillColor: Colors.transparent,
+              fillColor: widget.fillColor ?? Colors.transparent,
+
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
+                borderRadius:
+                BorderRadius.circular(widget.borderRadius ?? 12),
                 borderSide: BorderSide(
                   color: widget.borderColor ?? AppColors.greyLight,
                   width: widget.borderWidth ?? 1,
                 ),
               ),
+
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
+                borderRadius:
+                BorderRadius.circular(widget.borderRadius ?? 12),
                 borderSide: BorderSide(
-                  color: widget.focusBorderColor ?? AppColors.greyLight,
+                  color:
+                  widget.focusBorderColor ?? AppColors.greyLight,
                   width: widget.focusBorderWidth ?? 1.3,
                 ),
               ),

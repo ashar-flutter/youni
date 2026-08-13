@@ -16,7 +16,7 @@ class AccountSubscription extends StatelessWidget {
             children: [
               SizedBox(height: 4.5.h),
 
-              //  Logo
+              // Logo
               Center(
                 child: Image.asset(
                   AppImage.youniLogo,
@@ -120,30 +120,22 @@ class AccountSubscription extends StatelessWidget {
                 subtitle: 'Unlock all features',
                 price: '\$9',
                 period: '/month',
-                actionIcons: [
-                  _FeatureIcon(
+                actionIcons:const [
+                  FeatureIcon(
                     iconPath: AppImage.robotIcon,
-                    bgColor: AppColors.green.withValues(alpha: 0.2),
-                    iconColor: AppColors.green,
-                    borderColor: AppColors.green.withValues(alpha: 0.3),
+                    color: AppColors.green,
                   ),
-                  _FeatureIcon(
+                  FeatureIcon(
                     iconPath: AppImage.chatIcon,
-                    bgColor: AppColors.primary.withValues(alpha: 0.2),
-                    iconColor: AppColors.primary,
-                    borderColor: AppColors.primary.withValues(alpha: 0.3),
+                    color: AppColors.primary,
                   ),
-                  _FeatureIcon(
+                  FeatureIcon(
                     iconPath: AppImage.audioCallIcon,
-                    bgColor: AppColors.purple.withValues(alpha: 0.2),
-                    iconColor: AppColors.purple,
-                    borderColor: AppColors.purple.withValues(alpha: 0.3),
+                    color: AppColors.purple,
                   ),
-                  _FeatureIcon(
+                  FeatureIcon(
                     iconPath: AppImage.videoCallIcon,
-                    bgColor: AppColors.orange.withValues(alpha: 0.2),
-                    iconColor: AppColors.orange,
-                    borderColor: AppColors.orange.withValues(alpha: 0.3),
+                    color: AppColors.orange,
                   ),
                 ],
                 features: const [
@@ -179,7 +171,7 @@ class AccountSubscription extends StatelessWidget {
                 text: 'Login',
                 onPressed: () {
                   Get.offAll(
-                    () => const Login(),
+                        () => const Login(),
                     transition: Transition.fadeIn,
                     duration: const Duration(milliseconds: 400),
                   );
@@ -202,7 +194,7 @@ class AccountSubscription extends StatelessWidget {
                   onTap(
                     onTap: () {
                       Get.offAll(
-                        () => const Register(),
+                            () => const Register(),
                         transition: Transition.fadeIn,
                         duration: const Duration(milliseconds: 400),
                       );
@@ -364,10 +356,10 @@ class _SubscriptionCard extends StatelessWidget {
                       children: actionIcons!
                           .map(
                             (icon) => Padding(
-                              padding: EdgeInsets.only(right: 3.w),
-                              child: icon,
-                            ),
-                          )
+                          padding: EdgeInsets.only(right: 3.w),
+                          child: icon,
+                        ),
+                      )
                           .toList(),
                     ),
                   ],
@@ -379,38 +371,38 @@ class _SubscriptionCard extends StatelessWidget {
                     children: features
                         .map(
                           (feature) => Padding(
-                            padding: EdgeInsets.only(bottom: 2.h),
-                            child: Row(
-                              children: [
-                                SizedBox(width: 2.w),
+                        padding: EdgeInsets.only(bottom: 2.h),
+                        child: Row(
+                          children: [
+                            SizedBox(width: 2.w),
 
-                                Container(
-                                  width: 6.w,
-                                  height: 6.w,
-                                  decoration: BoxDecoration(
-                                    gradient: checkGradient,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Icon(
-                                    Icons.check,
-                                    size: 3.20.w,
-                                    color: checkColor,
-                                  ),
-                                ),
-                                SizedBox(width: 3.2.w),
-                                Expanded(
-                                  child: CustomText(
-                                    feature,
-                                    fontSize: 15.sp,
-                                    color: AppColors.white.withValues(
-                                      alpha: 0.9,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            Container(
+                              width: 6.w,
+                              height: 6.w,
+                              decoration: BoxDecoration(
+                                gradient: checkGradient,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.check,
+                                size: 3.20.w,
+                                color: checkColor,
+                              ),
                             ),
-                          ),
-                        )
+                            SizedBox(width: 3.2.w),
+                            Expanded(
+                              child: CustomText(
+                                feature,
+                                fontSize: 15.sp,
+                                color: AppColors.white.withValues(
+                                  alpha: 0.9,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
                         .toList(),
                   ),
                 ],
@@ -449,42 +441,6 @@ class _SubscriptionCard extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _FeatureIcon extends StatelessWidget {
-  final String iconPath;
-  final Color bgColor;
-  final Color iconColor;
-  final Color borderColor;
-
-  const _FeatureIcon({
-    required this.iconPath,
-    required this.bgColor,
-    required this.iconColor,
-    required this.borderColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 10.5.w,
-      height: 10.5.w,
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: borderColor, width: 1),
-      ),
-      child: Center(
-        child: Image.asset(
-          iconPath,
-          width: 5.3.w,
-          height: 5.3.w,
-          fit: BoxFit.contain,
-          color: iconColor,
-        ),
-      ),
     );
   }
 }

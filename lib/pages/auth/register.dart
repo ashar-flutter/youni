@@ -1,25 +1,31 @@
-import '../config/barrel.dart';
+import '../../config/barrel.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   int _selectedTabIndex = 0; // 0: Personal Account, 1: Corporate Account
-  bool _rememberMe = false;
+  bool _agreedToTerms = false;
 
+  final TextEditingController _corporateIdController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _professionController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _companyIdController = TextEditingController();
 
   @override
   void dispose() {
+    _corporateIdController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _professionController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _companyIdController.dispose();
     super.dispose();
   }
 
@@ -31,7 +37,6 @@ class _LoginState extends State<Login> {
         children: [
           const AuthHeader(),
 
-          // Main Scrollable Bottom Sheet Content
           SafeArea(
             bottom: false,
             child: SingleChildScrollView(
@@ -40,7 +45,6 @@ class _LoginState extends State<Login> {
                 children: [
                   SizedBox(height: 45.h),
 
-                  // Dark Sheet Container
                   Container(
                     width: 100.w,
                     constraints: BoxConstraints(minHeight: 76.h),
@@ -63,11 +67,11 @@ class _LoginState extends State<Login> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // Header Title
-                        CustomText('Hey there!', fontSize: 20.sp),
+                        CustomText('Register', fontSize: 20.sp),
 
                         SizedBox(height: 2.5.h),
 
-                        // Custom Tab Switcher
+                        // Custom Tab Switcher (Personal / Corporate)
                         Column(
                           children: [
                             Row(
@@ -98,7 +102,6 @@ class _LoginState extends State<Login> {
                             ),
                             SizedBox(height: 0.8.h),
 
-                            // Single Active Indicator Line Under Selected Tab
                             Stack(
                               children: [
                                 const SizedBox(
@@ -124,7 +127,28 @@ class _LoginState extends State<Login> {
                           ],
                         ),
 
-                        SizedBox(height: 3.h),
+                        SizedBox(height: 4.h),
+
+                        // Profile Photo Picker
+                       onTap(
+                          onTap: () {},
+                          child: Container(
+                            width: 14.w,
+                            height: 14.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.white.withValues(alpha: 0.20),
+
+                            ),
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              size: 6.3.w,
+                              color: AppColors.white.withValues(alpha: 0.7),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 3.2.h),
 
                         // Form Dynamic Input Fields
                         AnimatedSwitcher(
@@ -136,12 +160,36 @@ class _LoginState extends State<Login> {
                               children: [
                                 if (_selectedTabIndex == 1) ...[
                                   AppTextField(
-                                    labelText: 'Company ID',
-                                    hintText: 'Company ID',
-                                    controller: _companyIdController,
+                                    labelText: 'Corporate ID',
+                                    hintText: 'Corporate ID',
+                                    controller: _corporateIdController,
                                   ),
                                   SizedBox(height: 3.h),
                                 ],
+
+                                AppTextField(
+                                  labelText: 'First Name',
+                                  hintText: 'First Name',
+                                  controller: _firstNameController,
+                                ),
+
+                                SizedBox(height: 3.h),
+
+                                AppTextField(
+                                  labelText: 'Last Name',
+                                  hintText: 'Last Name',
+                                  controller: _lastNameController,
+                                ),
+
+                                SizedBox(height: 3.h),
+
+                                AppTextField(
+                                  labelText: 'Profession',
+                                  hintText: 'Profession',
+                                  controller: _professionController,
+                                ),
+
+                                SizedBox(height: 3.h),
 
                                 AppTextField(
                                   labelText: 'Email',
@@ -163,74 +211,94 @@ class _LoginState extends State<Login> {
                           ),
                         ),
 
-                        SizedBox(height: 1.8.h),
+                        SizedBox(height: 2.3.h),
 
-                        // Remember Me & Forgot Password Section
+                        // Terms Agreement Checkbox
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            onTap(
-                              onTap: () {
-                                setState(() {
-                                  _rememberMe = !_rememberMe;
-                                });
-                              },
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 18.px,
-                                    height: 18.px,
-                                    child: Checkbox(
-                                      value: _rememberMe,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          _rememberMe = val ?? false;
-                                        });
-                                      },
-                                      activeColor: AppColors.blue,
-                                      checkColor: AppColors.white,
-                                      side: const BorderSide(
-                                        color: AppColors.blue,
-                                        width: 1.5,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 2.w),
-                                  CustomText(
-                                    'Remember Me',
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.blue,
-                                  ),
-                                ],
+                            SizedBox(
+                              width: 18.px,
+                              height: 18.px,
+                              child: Checkbox(
+                                value: _agreedToTerms,
+                                onChanged: (val) {
+                                  setState(() {
+                                    _agreedToTerms = val ?? false;
+                                  });
+                                },
+                                activeColor: AppColors.blue,
+                                checkColor: AppColors.white,
+                                side: const BorderSide(
+                                  color: AppColors.blue,
+                                  width: 1.5,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
                               ),
                             ),
-                            onTap(
-                              onTap: () {
-                                Get.to(
-                                      () => const ResetPassword(),
-                                  transition: Transition.fadeIn,
-                                  duration: const Duration(milliseconds: 300),
-                                );
-                              },
-                              child: CustomText(
-                                'Forgot Password',
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.blue,
+                            SizedBox(width: 2.w),
+                            Expanded(
+                              child: Padding(
+                                padding:  EdgeInsets.only(top: 1.w),
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'I agree to the ',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Terms of Service',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppColors.blue,
+                                        ),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {},
+                                      ),
+                                      TextSpan(
+                                        text: ' and ',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Privacy Policy',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppColors.blue,
+                                        ),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {},
+                                      ),
+                                      TextSpan(
+                                        text: '.',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           ],
                         ),
 
-                        SizedBox(height: 3.h),
+                        SizedBox(height: 4.h),
 
                         // Primary Action Button
                         AppButton(
-                          text: 'Login',
+                          text: 'Register',
                           onPressed: () {},
                           backgroundColor: Colors.transparent,
                           borderColor: AppColors.primary,
@@ -238,26 +306,26 @@ class _LoginState extends State<Login> {
 
                         SizedBox(height: 4.h),
 
-                        // Register Redirection Row
+                        // Already have an account Row
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CustomText(
-                              "Don't have an account? ",
+                              'Already have an account? ',
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                             ),
                             onTap(
                               onTap: () {
-                                Get.to(()=> const Register(),
-                                transition: Transition.fadeIn,
-                                  duration: Duration(milliseconds: 300)
+                                Get.offAll(
+                                  () => const Login(),
+                                  transition: Transition.fadeIn,
+                                  duration: const Duration(milliseconds: 300),
                                 );
                               },
                               child: CustomText(
-                                'Signup',
+                                'Login',
                                 fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
                                 color: AppColors.blue,
                                 decoration: TextDecoration.underline,
                                 decorationColor: AppColors.blue,

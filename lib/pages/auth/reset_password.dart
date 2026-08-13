@@ -1,21 +1,18 @@
-import '../config/barrel.dart';
+import '../../config/barrel.dart';
 
-class NewPassword extends StatefulWidget {
-  const NewPassword({super.key});
+class ResetPassword extends StatefulWidget {
+  const ResetPassword({super.key});
 
   @override
-  State<NewPassword> createState() => _NewPasswordState();
+  State<ResetPassword> createState() => _ResetPasswordState();
 }
 
-class _NewPasswordState extends State<NewPassword> {
-  final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-  TextEditingController();
+class _ResetPasswordState extends State<ResetPassword> {
+  final TextEditingController _emailController = TextEditingController();
 
   @override
   void dispose() {
-    _newPasswordController.dispose();
-    _confirmPasswordController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
@@ -37,7 +34,7 @@ class _NewPasswordState extends State<NewPassword> {
 
                   Container(
                     width: 100.w,
-                    constraints: BoxConstraints(minHeight: 76.h),
+                    constraints: BoxConstraints(minHeight: 62.h),
                     padding: EdgeInsets.symmetric(
                       horizontal: 5.w,
                       vertical: 3.h,
@@ -56,7 +53,7 @@ class _NewPasswordState extends State<NewPassword> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CustomText('New Password', fontSize: 20.sp),
+                        CustomText('Reset Password', fontSize: 20.sp),
 
                         SizedBox(height: 3.h),
 
@@ -64,28 +61,23 @@ class _NewPasswordState extends State<NewPassword> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AppTextField(
-                              labelText: 'Enter New Password',
-                              hintText: 'Enter New Password',
-                              controller: _newPasswordController,
-                              obscureText: true,
-                            ),
-                            SizedBox(height: 3.h),
-                            AppTextField(
-                              labelText: 'Confirm Password',
-                              hintText: 'Confirm Password',
-                              controller: _confirmPasswordController,
-                              obscureText: true,
+                              labelText: 'Enter Email Address',
+                              hintText: 'Email Address',
+                              controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
                             ),
                           ],
                         ),
 
-                        SizedBox(height: 4.2.h),
+                        SizedBox(height: 3.h),
 
                         AppButton(
-                          text: 'Reset Password',
+                          text: 'Send Link',
                           onPressed: () {
-                            Get.offAll(
-                                  () => const Login(),
+                            Get.to(
+                              () => ResetPasswordSent(
+                                email: _emailController.text,
+                              ),
                               transition: Transition.fadeIn,
                               duration: const Duration(milliseconds: 300),
                             );
@@ -93,7 +85,6 @@ class _NewPasswordState extends State<NewPassword> {
                           backgroundColor: Colors.transparent,
                           borderColor: AppColors.primary,
                         ),
-
                         SizedBox(height: 4.h),
 
                         const AuthFooterSection(),

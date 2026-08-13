@@ -1,0 +1,61 @@
+import '../config/barrel.dart';
+
+class NewEntityRow extends StatelessWidget {
+  const NewEntityRow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 7.w),
+      child: SizedBox(
+        width: 100.w,
+        child: Row(
+          children: [
+            // 1. Search Field - Slightly wider
+            Expanded(
+              flex: 143,
+              child: AppTextField(
+                height: 46.px,
+                fillColor: AppColors.greyDark.withValues(alpha: 0.67),
+                hintText: 'Search',
+                hintColor: AppColors.white.withValues(alpha: 0.4),
+                borderColor: AppColors.greyDark,
+                borderRadius: 10,
+
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(left: 3.2.w, right: 1.2.w),
+                  child: Icon(
+                    Icons.search_rounded,
+                    color: AppColors.white.withValues(alpha: 0.4),
+                    size: 24.px,
+                  ),
+                ),
+
+                prefixIconConstraints: const BoxConstraints(
+                  minWidth: 0,
+                  minHeight: 0,
+                ),
+              ),
+            ),
+
+            SizedBox(width: 3.3.w),
+
+            // 2. Create Button
+            Expanded(
+              flex: 100,
+              child: AppButton(
+                height: 46.px,
+                borderRadius: 12,
+                text: 'Create New Entity',
+                onPressed: () {},
+                borderColor: AppColors.primary,
+                backgroundColor: AppColors.dark,
+                fontSize: 14.sp,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
