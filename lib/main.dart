@@ -1,5 +1,5 @@
-
 import '../../../config/barrel.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -16,9 +16,7 @@ class MyApp extends StatelessWidget {
           home: const MainLayout(),
           debugShowCheckedModeBanner: false,
           builder: (context, child) {
-            return SafeArea(
-              child: child!,
-            );
+            return SafeArea(child: child!);
           },
         );
       },

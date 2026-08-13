@@ -53,7 +53,7 @@ class BottomNavBar extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? (isToDoList ? AppColors.gold : AppColors.primary)
+                          ? (isToDoList ? AppColors.gold : AppColors.blue)
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(30),
                     ),

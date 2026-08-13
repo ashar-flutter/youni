@@ -177,7 +177,7 @@ class _ArchiveCard extends StatelessWidget {
                 height: 7.6.w,
                 decoration: BoxDecoration(
                   color: iconColor.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(9),
+                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(
                     color: iconColor.withValues(alpha: 0.4),
                     width: 1,
@@ -185,17 +185,17 @@ class _ArchiveCard extends StatelessWidget {
                 ),
                 child: usesStarAsset
                     ? Padding(
-                        padding: EdgeInsets.all(2.2.w),
+                        padding: EdgeInsets.all(2.w),
                         child: Image.asset(
                           AppImage.starIcon,
                           color: iconColor,
-                          height: 4.7.w,
+                          height: 5.5.w,
                         ),
                       )
-                    : Icon(Icons.star_rounded, size: 4.7.w, color: iconColor),
+                    : Icon(Icons.star_rounded, size: 5.w, color: iconColor),
               ),
 
-              SizedBox(width: 3.6.w),
+              SizedBox(width: 3.8.w),
 
               Expanded(
                 child: Column(
@@ -209,7 +209,7 @@ class _ArchiveCard extends StatelessWidget {
                         Flexible(
                           child: CustomText(
                             title,
-                            fontSize: 16.sp,
+                            fontSize: 15.5.sp,
                             fontWeight: FontWeight.w400,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -219,7 +219,7 @@ class _ArchiveCard extends StatelessWidget {
 
                         Container(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 3.5.w,
+                            horizontal: 2.w,
                             vertical: 0.5.h,
                           ),
                           decoration: BoxDecoration(
@@ -239,7 +239,7 @@ class _ArchiveCard extends StatelessWidget {
                               SizedBox(width: 1.3.w),
                               CustomText(
                                 isCompleted ? 'Completed' : 'Overdue',
-                                fontSize: 12.sp,
+                                fontSize: 12.5.sp,
                                 fontWeight: FontWeight.w600,
                                 color: statusColor,
                               ),
@@ -268,7 +268,7 @@ class _ArchiveCard extends StatelessWidget {
                         Expanded(
                           child: CustomText(
                             dateRange,
-                            fontSize: 13.3.sp,
+                            fontSize: 12.3.sp,
                             fontWeight: FontWeight.w500,
                             color: statusColor,
                             overflow: TextOverflow.ellipsis,
@@ -288,7 +288,7 @@ class _ArchiveCard extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(
-                  width: 35.w,
+                  width: 32.w,
                   child: onTap(
                     onTap: onEditRestore,
                     child: Container(
@@ -321,15 +321,15 @@ class _ArchiveCard extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(width: 3.w),
+                SizedBox(width: 2.5.w),
 
                 onTap(
                   onTap: onDelete,
                   child: Container(
-                    width: 9.w,
-                    height: 9.w,
+                    width: 10.w,
+                    height: 9.5.w,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(9),
                       border: Border.all(
                         color: AppColors.white.withValues(alpha: 0.1),
                         width: 1,
@@ -337,7 +337,7 @@ class _ArchiveCard extends StatelessWidget {
                     ),
                     child: Icon(
                       Icons.delete_forever_outlined,
-                      size: 4.2.w,
+                      size: 4.8.w,
                       color: AppColors.white,
                     ),
                   ),

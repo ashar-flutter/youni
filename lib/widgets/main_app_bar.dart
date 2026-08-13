@@ -166,17 +166,24 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 SizedBox(width: 1.8.w),
 
                 // 5. Profile Avatar
-                Container(
-                  width: 24.px,
-                  height: 24.px,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.greyMedium, width: 1),
-                  ),
-                  child: ClipOval(
-                    child: Image.network(
-                      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
-                      fit: BoxFit.cover,
+                onTap(
+                  onTap: (){
+                    Get.to(()=> const Setting(),
+                    transition: Transition.fadeIn
+                    );
+                  },
+                  child: Container(
+                    width: 24.px,
+                    height: 24.px,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: AppColors.greyMedium, width: 1),
+                    ),
+                    child: ClipOval(
+                      child: Image.network(
+                        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),

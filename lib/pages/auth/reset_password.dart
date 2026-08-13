@@ -55,7 +55,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       children: [
                         CustomText('Reset Password', fontSize: 20.sp),
 
-                        SizedBox(height: 3.h),
+                        SizedBox(height: 4.h),
 
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

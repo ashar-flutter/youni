@@ -19,4 +19,7 @@ class AppColors {
   static const Color greyMedium = Color(0xFF717680);
   static const Color dark = Color(0xFF111111);
   static const Color darkBackground = Color(0xFF16161C);
+  static const Color charcoal = Color(0xFF333333);
+  static const Color blueBright = Color(0xFF3B82F6);
+  static const Color blueSky = Color(0xFF60A5FA);
 }

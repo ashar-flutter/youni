@@ -21,6 +21,12 @@ class AppImage {
   static const String itemFiveIcon = "assets/icons/item_five.png";
 
 
+  // settings icons
+  static const String bellIcon = "assets/icons/bell.png";
+  static const String securityIcon = "assets/icons/security.png";
+  static const String subscription = "assets/icons/subscription.png";
+  static const String userIcon = "assets/icons/user.png";
+
 
   // all logos
   static const String youniLogo = "assets/logos/youni_logo.png";

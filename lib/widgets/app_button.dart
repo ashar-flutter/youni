@@ -14,6 +14,8 @@ class AppButton extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
 
+  final Widget? icon;
+
   const AppButton({
     super.key,
     required this.text,
@@ -28,6 +30,7 @@ class AppButton extends StatelessWidget {
     this.fontWeight,
     this.margin,
     this.padding,
+    this.icon,
   });
 
   @override
@@ -50,12 +53,18 @@ class AppButton extends StatelessWidget {
           padding: padding ?? EdgeInsets.zero,
           elevation: 0,
         ),
-        child: CustomText(
-          text,
-          fontSize: fontSize ?? 16.sp,
-          fontWeight: fontWeight ?? FontWeight.w600,
-          color: textColor ?? AppColors.white,
-          font: CustomFont.manrope,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (icon != null) ...[icon!, SizedBox(width: 8)],
+            CustomText(
+              text,
+              fontSize: fontSize ?? 16.sp,
+              fontWeight: fontWeight ?? FontWeight.w600,
+              color: textColor ?? AppColors.white,
+              font: CustomFont.manrope,
+            ),
+          ],
         ),
       ),
     );

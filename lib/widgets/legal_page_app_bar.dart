@@ -3,11 +3,15 @@ import '../config/barrel.dart';
 class LegalPageAppBar extends StatelessWidget {
   final String title;
   final String subtitle;
+  final bool showSubtitle;
+  final bool showDivider;
 
   const LegalPageAppBar({
     super.key,
     required this.title,
     required this.subtitle,
+    this.showSubtitle = true,
+    this.showDivider = true,
   });
 
   @override
@@ -23,8 +27,8 @@ class LegalPageAppBar extends StatelessWidget {
               onTap(
                 onTap: () => Get.back(),
                 child: Container(
-                  width: 8.w,
-                  height: 8.w,
+                  width: 7.w,
+                  height: 7.w,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: AppColors.white.withValues(alpha: 0.06),
@@ -35,7 +39,7 @@ class LegalPageAppBar extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.arrow_back_ios_new_rounded,
-                    size: 3.w,
+                    size: 2.8.w,
                     color: AppColors.white,
                   ),
                 ),
@@ -45,14 +49,16 @@ class LegalPageAppBar extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomText(title, fontSize: 18.sp),
-                    SizedBox(height: 0.9.h),
-                    CustomText(
-                      subtitle,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.white.withValues(alpha: 0.5),
-                    ),
+                    CustomText(title, fontSize: 17.2.sp),
+                    if (showSubtitle) ...[
+                      SizedBox(height: 0.9.h),
+                      CustomText(
+                        subtitle,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.white.withValues(alpha: 0.5),
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -60,14 +66,15 @@ class LegalPageAppBar extends StatelessWidget {
           ),
         ),
         SizedBox(height: 4.h),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 3.w),
-          height: 2,
-          width: double.infinity,
-          color: AppColors.white.withValues(alpha: 0.11),
-        ),
-        SizedBox(height: 2.h),
-
+        if (showDivider) ...[
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 3.w),
+            height: 2,
+            width: double.infinity,
+            color: AppColors.white.withValues(alpha: 0.11),
+          ),
+          SizedBox(height: 2.h),
+        ],
       ],
     );
   }

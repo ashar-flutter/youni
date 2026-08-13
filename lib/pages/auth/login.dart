@@ -231,7 +231,7 @@ class _LoginState extends State<Login> {
                         AppButton(
                           text: 'Login',
                           onPressed: () {
-                            // Get.offAll(()=> const BottomNavBar());
+                            Get.offAll(()=> const MainLayout());
                           },
                           backgroundColor: Colors.transparent,
                           borderColor: AppColors.primary,

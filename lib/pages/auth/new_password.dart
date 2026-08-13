@@ -58,7 +58,7 @@ class _NewPasswordState extends State<NewPassword> {
                       children: [
                         CustomText('New Password', fontSize: 20.sp),
 
-                        SizedBox(height: 3.h),
+                        SizedBox(height: 4.h),
 
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

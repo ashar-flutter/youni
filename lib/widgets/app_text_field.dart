@@ -34,6 +34,10 @@ class AppTextField extends StatefulWidget {
   final bool? autofocus;
   final String? obscuringCharacter;
 
+  final double? labelSize;
+  final double? hintSize;
+  final double? textSize;
+
   const AppTextField({
     super.key,
     this.hintText,
@@ -68,6 +72,9 @@ class AppTextField extends StatefulWidget {
     this.focusNode,
     this.autofocus = false,
     this.obscuringCharacter = '*',
+    this.labelSize,
+    this.hintSize,
+    this.textSize,
   });
 
   @override
@@ -95,13 +102,17 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final double labelFontSize = widget.labelSize ?? 16.sp;
+    final double hintFontSize = widget.hintSize ?? 16.sp;
+    final double textFontSize = widget.textSize ?? 16.sp;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.labelText != null) ...[
           CustomText(
             widget.labelText!,
-            fontSize: 16.sp,
+            fontSize: labelFontSize,
             fontWeight: FontWeight.w500,
             color: widget.labelColor ?? AppColors.white,
           ),
@@ -126,7 +137,7 @@ class _AppTextFieldState extends State<AppTextField> {
             autofocus: widget.autofocus ?? false,
             style: widget.textStyle ??
                 TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: textFontSize,
                   fontWeight: FontWeight.w400,
                   color: widget.textColor ?? AppColors.white,
                 ),
@@ -134,11 +145,10 @@ class _AppTextFieldState extends State<AppTextField> {
               hintText: widget.hintText,
               hintStyle: widget.hintStyle ??
                   TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: hintFontSize,
                     fontWeight: FontWeight.w400,
                     color: widget.hintColor ?? AppColors.greyMedium,
                   ),
-
               prefixIcon: widget.prefixIcon != null
                   ? IconTheme(
                 data: IconThemeData(
@@ -148,9 +158,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 child: widget.prefixIcon!,
               )
                   : null,
-
               prefixIconConstraints: widget.prefixIconConstraints,
-
               suffixIcon: widget.obscureText == true
                   ? IconTheme(
                 data: IconThemeData(
@@ -183,31 +191,24 @@ class _AppTextFieldState extends State<AppTextField> {
                 child: widget.suffixIcon!,
               )
                   : null,
-
               contentPadding: widget.contentPadding ??
                   EdgeInsets.symmetric(
                     horizontal: 4.w,
                     vertical: 1.5.h,
                   ),
-
               filled: true,
               fillColor: widget.fillColor ?? Colors.transparent,
-
               enabledBorder: OutlineInputBorder(
-                borderRadius:
-                BorderRadius.circular(widget.borderRadius ?? 12),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
                 borderSide: BorderSide(
                   color: widget.borderColor ?? AppColors.greyLight,
                   width: widget.borderWidth ?? 1,
                 ),
               ),
-
               focusedBorder: OutlineInputBorder(
-                borderRadius:
-                BorderRadius.circular(widget.borderRadius ?? 12),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
                 borderSide: BorderSide(
-                  color:
-                  widget.focusBorderColor ?? AppColors.greyLight,
+                  color: widget.focusBorderColor ?? AppColors.greyLight,
                   width: widget.focusBorderWidth ?? 1.3,
                 ),
               ),

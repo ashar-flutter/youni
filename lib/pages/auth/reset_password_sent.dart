@@ -47,7 +47,7 @@ class ResetPasswordSent extends StatelessWidget {
                           fontSize: 20.sp,
                         ),
 
-                        SizedBox(height: 3.5.h),
+                        SizedBox(height: 4.h),
 
                         RichText(
                           textAlign: TextAlign.center,
