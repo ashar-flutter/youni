@@ -5,6 +5,7 @@ class LegalPageAppBar extends StatelessWidget {
   final String subtitle;
   final bool showSubtitle;
   final bool showDivider;
+  final Color? subtitleColor;
 
   const LegalPageAppBar({
     super.key,
@@ -12,6 +13,7 @@ class LegalPageAppBar extends StatelessWidget {
     required this.subtitle,
     this.showSubtitle = true,
     this.showDivider = true,
+    this.subtitleColor,
   });
 
   @override
@@ -27,8 +29,8 @@ class LegalPageAppBar extends StatelessWidget {
               onTap(
                 onTap: () => Get.back(),
                 child: Container(
-                  width: 7.w,
-                  height: 7.w,
+                  width: 7.3.w,
+                  height: 7.3.w,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: AppColors.white.withValues(alpha: 0.06),
@@ -39,7 +41,7 @@ class LegalPageAppBar extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.arrow_back_ios_new_rounded,
-                    size: 2.8.w,
+                    size: 3.w,
                     color: AppColors.white,
                   ),
                 ),
@@ -49,14 +51,14 @@ class LegalPageAppBar extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomText(title, fontSize: 17.2.sp),
+                    CustomText(title, fontSize: 18.sp),
                     if (showSubtitle) ...[
-                      SizedBox(height: 0.9.h),
+                      SizedBox(height: 0.6.h),
                       CustomText(
                         subtitle,
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
-                        color: AppColors.white.withValues(alpha: 0.5),
+                        color: subtitleColor ?? AppColors.white.withValues(alpha: 0.5),
                       ),
                     ],
                   ],

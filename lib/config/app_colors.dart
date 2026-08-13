@@ -22,4 +22,8 @@ class AppColors {
   static const Color charcoal = Color(0xFF333333);
   static const Color blueBright = Color(0xFF3B82F6);
   static const Color blueSky = Color(0xFF60A5FA);
+  static const Color mutedRoseGray = Color(0xFFB4A7A9);
+  static const Color black = Color(0xFF000000);
+  static const Color magenta = Color(0xFFE60076);
+  static const Color deepBlueOverlay = Color(0x331C398E);
 }

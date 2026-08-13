@@ -55,7 +55,10 @@ class Setting extends StatelessWidget {
                               _buildSettingTile(
                                 iconPath: AppImage.subscription,
                                 title: 'Subscription',
-                                onTap: () {},
+                                onTap: () => Get.to(
+                                      () => const SubscriptionPlan(),
+                                  transition: Transition.fadeIn,
+                                ),
                               ),
                               SizedBox(height: 2.h),
                               _buildSettingTile(
