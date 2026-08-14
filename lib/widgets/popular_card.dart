@@ -201,9 +201,8 @@ class _PopularCardState extends State<PopularCard> {
                                       child: CustomText(
                                         feature,
                                         fontSize: 15.sp,
-                                        color: AppColors.white.withValues(
-                                          alpha: 0.9,
-                                        ),
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.white
                                       ),
                                     ),
                                   ],
@@ -219,7 +218,7 @@ class _PopularCardState extends State<PopularCard> {
                     Align(
                       alignment: Alignment.center,
                       child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 3.w),
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
                         child: PlanButton(
                           onTap: widget.onPlanButtonTap,
                           height: 55.px,

@@ -156,9 +156,8 @@ class LunarCard extends StatelessWidget {
                               child: CustomText(
                                 feature,
                                 fontSize: 15.sp,
-                                color: AppColors.white.withValues(
-                                  alpha: 0.9,
-                                ),
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                           ],

@@ -79,22 +79,16 @@ class TreeView extends StatelessWidget {
           Container(
             width: double.infinity,
             margin: EdgeInsets.symmetric(horizontal: 7.w),
-            padding: EdgeInsets.symmetric(
-              horizontal: 3.w,
-              vertical: 2.h,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
             decoration: BoxDecoration(
               color: AppColors.charcoal,
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                color: AppColors.greyDark,
-                width: 1,
-              ),
+              border: Border.all(color: AppColors.greyDark, width: 1),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 1.w,),
+                SizedBox(width: 1.w),
                 Row(
                   children: [
                     Icon(
@@ -114,7 +108,7 @@ class TreeView extends StatelessWidget {
                 SizedBox(height: 0.4.h),
 
                 Padding(
-                  padding:  EdgeInsets.only(left: 9.w),
+                  padding: EdgeInsets.only(left: 9.w),
                   child: CustomText(
                     'Hierarchical view',
                     fontSize: 12.8.sp,
@@ -367,9 +361,7 @@ class _TreeNodeData {
 class _MapNode extends StatelessWidget {
   final _TreeNodeData data;
 
-  const _MapNode({
-    required this.data,
-  });
+  const _MapNode({required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -391,12 +383,12 @@ class _MapNode extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             boxShadow: showGlow
                 ? [
-              BoxShadow(
-                color: data.color.withValues(alpha: 0.20),
-                blurRadius: 18.6,
-                spreadRadius: 0,
-              ),
-            ]
+                    BoxShadow(
+                      color: data.color.withValues(alpha: 0.20),
+                      blurRadius: 18.6,
+                      spreadRadius: 0,
+                    ),
+                  ]
                 : [],
           ),
           child: Column(
@@ -414,16 +406,16 @@ class _MapNode extends StatelessWidget {
                 child: Center(
                   child: data.imageAsset != null
                       ? Image.asset(
-                    data.imageAsset!,
-                    width: 12,
-                    height: 12,
-                    color: data.color,
-                  )
+                          data.imageAsset!,
+                          width: 12,
+                          height: 12,
+                          color: data.color,
+                        )
                       : Icon(
-                    data.icon ?? Icons.circle,
-                    size: 13,
-                    color: data.color,
-                  ),
+                          data.icon ?? Icons.circle,
+                          size: 13,
+                          color: data.color,
+                        ),
                 ),
               ),
 
@@ -447,7 +439,6 @@ class _MapNode extends StatelessWidget {
                 color: AppColors.white.withValues(alpha: 0.75),
                 textAlign: TextAlign.center,
               ),
-
             ],
           ),
         ),

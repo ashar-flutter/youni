@@ -51,11 +51,11 @@ class Archive extends StatelessWidget {
           // Archive Content Container
           Container(
             width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 6.w),
+            margin: EdgeInsets.symmetric(horizontal: 7.w),
             padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.5.h),
             decoration: BoxDecoration(
               color: AppColors.greyDark.withValues(alpha: 0.67),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(22),
 
               border: Border.all(color: AppColors.greyDark, width: 1),
             ),

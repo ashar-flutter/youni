@@ -10,7 +10,7 @@ class AccountSubscription extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 7.w),
+          padding: EdgeInsets.symmetric(horizontal: 8.5.w),
           child: Column(
             children: [
               SizedBox(height: 4.5.h),

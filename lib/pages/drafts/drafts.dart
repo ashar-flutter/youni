@@ -170,7 +170,7 @@ class _DraftCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 0.5.h,),
+          SizedBox(height: 0.5.h),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -200,10 +200,7 @@ class _DraftCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomText(
-                      title,
-                      fontSize: 15.8.sp,
-                    ),
+                    CustomText(title, fontSize: 15.8.sp),
                     SizedBox(height: 0.4.h),
                     CustomText(
                       subtitle,
@@ -233,7 +230,7 @@ class _DraftCard extends StatelessWidget {
                           ),
                           SizedBox(width: 1.4.w),
                           Padding(
-                            padding: EdgeInsets.only(top:0.2.w ),
+                            padding: EdgeInsets.only(top: 0.2.w),
                             child: CustomText(
                               'Missing timeline configuration',
                               fontSize: 12.2.sp,
@@ -258,14 +255,17 @@ class _DraftCard extends StatelessWidget {
                 onTap: onConfigure,
                 child: Container(
                   margin: EdgeInsets.only(left: 13.w),
-                  padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.7.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 3.w,
+                    vertical: 0.7.h,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.blue.withValues(alpha: 0.20),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: AppColors.blue.withValues(alpha: 0.30),
-                      width: 0.47.px
-                    )
+                      width: 0.47.px,
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -299,7 +299,7 @@ class _DraftCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 0.6.h,),
+          SizedBox(height: 0.6.h),
         ],
       ),
     );
