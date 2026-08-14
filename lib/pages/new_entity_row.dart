@@ -15,12 +15,12 @@ class NewEntityRow extends StatelessWidget {
             Expanded(
               flex: 143,
               child: AppTextField(
-                height: 46.px,
+                height: 40.px,
                 fillColor: AppColors.greyDark.withValues(alpha: 0.67),
                 hintText: 'Search',
                 hintColor: AppColors.white.withValues(alpha: 0.4),
                 borderColor: AppColors.greyDark,
-                borderRadius: 10,
+                borderRadius: 12,
 
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(left: 3.2.w, right: 1.2.w),
@@ -44,13 +44,13 @@ class NewEntityRow extends StatelessWidget {
             Expanded(
               flex: 100,
               child: AppButton(
-                height: 46.px,
+                height: 40.px,
                 borderRadius: 12,
                 text: 'Create New Entity',
                 onPressed: () {},
                 borderColor: AppColors.primary,
                 backgroundColor: AppColors.dark,
-                fontSize: 14.sp,
+                fontSize: 13.4.sp,
               ),
             ),
           ],
