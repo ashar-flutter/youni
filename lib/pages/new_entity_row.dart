@@ -22,8 +22,9 @@ class NewEntityRow extends StatelessWidget {
                 borderColor: AppColors.greyDark,
                 borderRadius: 12,
 
+                contentPadding: EdgeInsets.only(top: 1.2.w),
                 prefixIcon: Padding(
-                  padding: EdgeInsets.only(left: 3.2.w, right: 1.2.w),
+                  padding: EdgeInsets.only(left: 3.2.w, right: 0.6.w),
                   child: Icon(
                     Icons.search_rounded,
                     color: AppColors.white.withValues(alpha: 0.4),
@@ -45,12 +46,12 @@ class NewEntityRow extends StatelessWidget {
               flex: 100,
               child: AppButton(
                 height: 40.px,
-                borderRadius: 12,
+                borderRadius: 13,
                 text: 'Create New Entity',
                 onPressed: () {},
                 borderColor: AppColors.primary,
                 backgroundColor: AppColors.dark,
-                fontSize: 13.4.sp,
+                fontSize: 13.5.sp,
               ),
             ),
           ],

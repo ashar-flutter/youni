@@ -73,10 +73,13 @@ class BottomNavBar extends StatelessWidget {
                         ),
                         if (isSelected) ...[
                           SizedBox(width: 2.w),
-                          CustomText(
-                            item.label,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
+                          Padding(
+                            padding:  EdgeInsets.only(top:0.7.w ),
+                            child: CustomText(
+                              item.label,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ],
                       ],

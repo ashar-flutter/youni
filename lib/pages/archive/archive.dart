@@ -292,9 +292,9 @@ class _ArchiveCard extends StatelessWidget {
                   child: onTap(
                     onTap: onEditRestore,
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 1.h),
+                      padding: EdgeInsets.symmetric(vertical: 0.8.h),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(8),
                         border: Border.all(
                           color: AppColors.white.withValues(alpha: 0.1),
                           width: 1,
@@ -305,7 +305,7 @@ class _ArchiveCard extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.edit_outlined,
-                            size: 5.w,
+                            size: 4.5.w,
                             color: AppColors.white,
                           ),
                           SizedBox(width: 1.8.w),
@@ -326,10 +326,10 @@ class _ArchiveCard extends StatelessWidget {
                 onTap(
                   onTap: onDelete,
                   child: Container(
-                    width: 10.w,
-                    height: 9.5.w,
+                    width: 8.2.w,
+                    height: 8.2.w,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(9),
+                      borderRadius: BorderRadius.circular(7),
                       border: Border.all(
                         color: AppColors.white.withValues(alpha: 0.1),
                         width: 1,
