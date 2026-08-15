@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, screenType) {
         return GetMaterialApp(
           title: 'Youni',
-          home: const Splash(),
+          home: const MainLayout(),
           debugShowCheckedModeBanner: false,
           builder: (context, child) {
             return SafeArea(child: child!);

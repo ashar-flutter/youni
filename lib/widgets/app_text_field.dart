@@ -38,7 +38,6 @@ class AppTextField extends StatefulWidget {
   final double? hintSize;
   final double? textSize;
 
-  // ✅ Naya — Label aur TextField ke beech gap
   final double? labelGap;
 
   const AppTextField({

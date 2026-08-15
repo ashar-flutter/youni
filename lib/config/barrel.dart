@@ -41,6 +41,10 @@ export'package:youni/pages/to_do_list/to_do_cards.dart';
 export 'package:youni/pages/to_do_list/recurring_card.dart';
 export 'package:youni/pages/to_do_list/active_card.dart';
 export 'package:youni/pages/to_do_list/completed_card.dart';
+export 'package:youni/pages/to_do_list/pop_ups/select_target_entity_dialog.dart';
+export 'package:youni/pages/to_do_list/pop_ups/add_new_task_dialog.dart';
+
+
 
 export 'package:youni/pages/auth/login.dart';
 export 'package:youni/pages/auth/register.dart';

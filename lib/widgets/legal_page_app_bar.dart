@@ -6,6 +6,7 @@ class LegalPageAppBar extends StatelessWidget {
   final bool showSubtitle;
   final bool showDivider;
   final Color? subtitleColor;
+  final double? rightPadding;
 
   const LegalPageAppBar({
     super.key,
@@ -14,6 +15,7 @@ class LegalPageAppBar extends StatelessWidget {
     this.showSubtitle = true,
     this.showDivider = true,
     this.subtitleColor,
+    this.rightPadding,
   });
 
   @override
@@ -22,15 +24,18 @@ class LegalPageAppBar extends StatelessWidget {
       children: [
         SizedBox(height: 3.h),
         Padding(
-          padding: EdgeInsets.only(left: 1.w),
+          padding: EdgeInsets.only(
+            left: rightPadding != null ? 0 : 1.w,
+            right: rightPadding ?? 0,
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               onTap(
                 onTap: () => Get.back(),
                 child: Container(
-                  width: 7.3.w,
-                  height: 7.3.w,
+                  width: 7.2.w,
+                  height: 7.2.w,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: AppColors.white.withValues(alpha: 0.06),
@@ -41,7 +46,7 @@ class LegalPageAppBar extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.arrow_back_ios_new_rounded,
-                    size: 3.w,
+                    size: 2.8.w,
                     color: AppColors.white,
                   ),
                 ),
@@ -51,7 +56,7 @@ class LegalPageAppBar extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomText(title, fontSize: 18.sp),
+                    CustomText(title, fontSize: 17.sp),
                     if (showSubtitle) ...[
                       SizedBox(height: 0.6.h),
                       CustomText(

@@ -11,6 +11,7 @@ class AppColors {
   static const Color magentaOverlay = Color(0x66861043);
   static const Color gold = Color(0xFFF0B100);
   static const Color goldAccent = Color(0xFFF9A91E);
+  static const Color darkSlate = Color(0xFF1E232B);
   static const Color blue = Color(0xFF167EE6);
   static const Color red = Color(0xFFFB2C36);
   static const Color lightBlue = Color(0xCCBEDBFF);
@@ -26,6 +27,9 @@ class AppColors {
   static const Color mutedRoseGray = Color(0xFFB4A7A9);
   static const Color black = Color(0xFF000000);
   static const Color magenta = Color(0xFFE60076);
+  static const Color slateBlue = Color(0xFF4A5A70);
+  static const Color slateBlueGray = Color(0xFF536074);
+  static const Color blueGrey = Color(0xFF90A4AE);
   static const Color deepBlueOverlay = Color(0x331C398E);
   static const Color deepNavy = Color(0xFF080717);
   static const Color calendarBorderBlue = Color(0xFF2B7FFF);
@@ -34,4 +38,8 @@ class AppColors {
   static const Color greenOverlay = Color(0x0D00C950);
   static const Color blackOverlay = Color(0x33000000);
   static const Color darkBlack = Color(0xFF0A0A0A);
+  static const Color lightBlueAccent = Color(0xFF42A5F5);
+  static const Color lightPurple = Color(0xFFAB47BC);
+  static const Color greenAccent = Color(0xFF66BB6A);
+  static const Color lightBlueAcc = Color(0xFF64B5F6);
 }

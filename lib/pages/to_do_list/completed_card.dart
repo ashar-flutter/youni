@@ -42,7 +42,7 @@ class _CompletedCardState extends State<CompletedCard> {
 
   @override
   Widget build(BuildContext context) {
-    const Color accent = Color(0xFF66BB6A);
+    const Color accent = AppColors.greenAccent;
 
     return Container(
       width: double.infinity,
@@ -50,7 +50,10 @@ class _CompletedCardState extends State<CompletedCard> {
       decoration: BoxDecoration(
         color: AppColors.greenOverlay.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.greenOverlay.withValues(alpha: 0.20), width: 1.2),
+        border: Border.all(
+          color: AppColors.greenOverlay.withValues(alpha: 0.20),
+          width: 1.2,
+        ),
         boxShadow: [
           BoxShadow(
             color: accent.withValues(alpha: 0.08),
@@ -62,28 +65,28 @@ class _CompletedCardState extends State<CompletedCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           TaskCardHeader(
+          TaskCardHeader(
             iconPath: AppImage.completedIcon,
             accentColor: accent,
             title: 'Completed',
-            subtitle: 'HISTORY', fillColor: AppColors.greenOverlay.withValues(alpha: 0.10),
+            subtitle: 'HISTORY',
+            fillColor: AppColors.greenOverlay.withValues(alpha: 0.10),
           ),
 
           SizedBox(height: 2.h),
 
           for (int i = 0; i < _items.length; i++)
+
             TaskItemTile(
-
-              backgroundColor:  AppColors.blackOverlay,
-
+              backgroundColor: AppColors.blackOverlay,
               buttonColor: AppColors.greenOverlay,
               panelBorderColor: AppColors.greenOverlay,
               textColor: AppColors.greenOverlay.withValues(alpha: 0.90),
               borderColor: AppColors.white.withValues(alpha: 0.05),
               data: _items[i],
               accentColor: accent,
-              showLeadingCheck: true, // Green check enabled
-              showMoveIcon: false,    // NO folder icon
+              showLeadingCheck: true,
+              showMoveIcon: false,
               isExpanded: _expanded[i],
               onToggle: () => setState(() => _expanded[i] = !_expanded[i]),
             ),

@@ -23,7 +23,7 @@ class TreeView extends StatelessWidget {
             title: 'Frontend',
             badge: 'MOON',
             icon: Icons.nightlight_outlined,
-            color: const Color(0xFF4A5A70),
+            color: AppColors.slateBlue,
             hasGlow: false,
             isExpanded: true,
             children: [
@@ -31,7 +31,7 @@ class TreeView extends StatelessWidget {
                 title: 'UI Components',
                 badge: 'SATELLITE',
                 icon: Icons.satellite_alt_rounded,
-                color: const Color(0xFF536074),
+                color: AppColors.slateBlueGray,
                 hasGlow: false,
                 isExpanded: true,
                 children: const [],
@@ -42,7 +42,7 @@ class TreeView extends StatelessWidget {
             title: 'Backend',
             badge: 'MOON',
             icon: Icons.nightlight_outlined,
-            color: const Color(0xFF4A5A70),
+            color: AppColors.slateBlue,
             hasGlow: false,
             isExpanded: true,
             children: const [],
@@ -450,7 +450,7 @@ class _MapNode extends StatelessWidget {
             width: 16,
             height: 16,
             decoration: BoxDecoration(
-              color: const Color(0xFF1E232B),
+              color: AppColors.darkSlate,
               shape: BoxShape.circle,
               border: Border.all(
                 color: AppColors.white.withValues(alpha: 0.25),

@@ -72,7 +72,7 @@ class TaskCardHeader extends StatelessWidget {
                 ],
               ),
             ),
-            if (trailing != null) trailing!,
+            ?trailing,
           ],
         ),
         if (belowContent != null) ...[SizedBox(height: 2.h), belowContent!],
@@ -126,7 +126,7 @@ class TaskItemTile extends StatelessWidget {
     this.borderWidth = 1,
     this.buttonColor = AppColors.blueOverlay,
     this.panelBorderColor = AppColors.blueOverlay,
-    this.textColor = const Color(0xFF64B5F6),
+    this.textColor = AppColors.lightBlueAcc,
   });
 
   @override
@@ -175,14 +175,14 @@ class TaskItemTile extends StatelessWidget {
                   Icon(
                     Icons.calendar_today_outlined,
                     size: 8.px,
-                    color: const Color(0xFF64B5F6),
+                    color: AppColors.lightBlueAcc,
                   ),
                   SizedBox(width: 1.2.w),
                   CustomText(
                     data.date,
                     fontSize: 8.px,
                     fontWeight: FontWeight.w400,
-                    color: const Color(0xFF64B5F6),
+                    color: AppColors.lightBlueAcc,
                   ),
                   SizedBox(width: 2.5.w),
                   Icon(Icons.delete_outline, size: 13.px, color: AppColors.red),
@@ -352,7 +352,6 @@ class _TaskDetailPanel extends StatelessWidget {
                     child: CustomText(
                       data.isRecurring ? 'Yes' : 'No',
                       fontSize: 10.px,
-                      fontWeight: FontWeight.w600,
                       color: textColor,
                     ),
                   ),
@@ -401,7 +400,9 @@ class _TaskDetailPanel extends StatelessWidget {
             _QuickActionButton(
               icon: Icons.drive_file_move_outline,
               label: 'Move to Entity',
-              onTap: () {},
+              onTap: () {
+                SelectTargetEntityDialog.show(context);
+              },
             ),
             _QuickActionButton(
               icon: Icons.check_circle_outline,
@@ -444,7 +445,6 @@ class _QuickActionButton extends StatelessWidget {
             CustomText(
               label,
               fontSize: 9.px,
-              fontWeight: FontWeight.w600,
               color: AppColors.darkBlack,
             ),
           ],

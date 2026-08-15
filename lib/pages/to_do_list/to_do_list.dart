@@ -188,7 +188,9 @@ class _ToDoListState extends State<ToDoList> {
 
                           // Add Task Button
                           onTap(
-                            onTap: () {},
+                            onTap: () {
+                              AddNewTaskDialog.show(context);
+                            },
                             child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 2.2.w, vertical: 0.8.h),
                               decoration: BoxDecoration(

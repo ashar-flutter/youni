@@ -70,7 +70,7 @@ class _ActiveCardState extends State<ActiveCard> {
 
   @override
   Widget build(BuildContext context) {
-    const Color accent = Color(0xFF42A5F5);
+    const Color accent = AppColors.lightBlueAccent;
 
     return Container(
       width: double.infinity,
@@ -78,7 +78,10 @@ class _ActiveCardState extends State<ActiveCard> {
       decoration: BoxDecoration(
         color: AppColors.blueOverlay.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.blueOverlay.withValues(alpha: 0.20), width: 1.2),
+        border: Border.all(
+          color: AppColors.blueOverlay.withValues(alpha: 0.20),
+          width: 1.2,
+        ),
         boxShadow: [
           BoxShadow(
             color: accent.withValues(alpha: 0.08),
@@ -96,7 +99,9 @@ class _ActiveCardState extends State<ActiveCard> {
             title: 'Active Tasks',
             subtitle: 'CURRENT FOCUS & ACTION ITEMS',
             trailing: onTap(
-              onTap: () {},
+              onTap: () {
+                AddNewTaskDialog.show(context);
+              },
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.9.h),
                 decoration: BoxDecoration(
@@ -121,42 +126,51 @@ class _ActiveCardState extends State<ActiveCard> {
                 ),
               ),
             ),
-              belowContent: Align(
-                alignment: Alignment.centerRight,
-                child: FractionallySizedBox(
-                  widthFactor: 0.58,
-                  child: AppTextField(
-                    focusBorderColor: Colors.transparent,
-                    borderColor: AppColors.white.withValues(alpha: 0.10),
-                    hintText: 'Search a task by date',
-                    height: 25.px,
-                    hintSize: 10.px,
-                    textSize: 11.px,
-                    hintColor: AppColors.white.withValues(alpha: 0.60),
-                    borderRadius: 30.px,
-                    fillColor: AppColors.white.withValues(alpha: 0.05),
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.only(left: 8.px,),
-                      child: Icon(
-                        Icons.search,
-                        size: 14.px,
-                        color: AppColors.white,
-                      ),
+            belowContent: Align(
+              alignment: Alignment.centerRight,
+              child: FractionallySizedBox(
+                widthFactor: 0.58,
+                child: AppTextField(
+                  readOnly: true,
+                  onTap: () {
+                    final ui = Get.find<UiController>();
+                    ui.navigate('todo', 0);
+                  },
+                  focusBorderColor: Colors.transparent,
+                  borderColor: AppColors.white.withValues(alpha: 0.10),
+                  hintText: 'Search a task by date',
+                  height: 25.px,
+                  hintSize: 10.px,
+                  textSize: 11.px,
+                  hintColor: AppColors.white.withValues(alpha: 0.60),
+                  borderRadius: 30.px,
+                  fillColor: AppColors.white.withValues(alpha: 0.05),
+                  prefixIcon: Padding(
+                    padding: EdgeInsets.only(left: 8.px),
+                    child: Icon(
+                      Icons.search,
+                      size: 14.px,
+                      color: AppColors.white,
                     ),
-                    prefixIconConstraints: BoxConstraints(
-                      minWidth: 26.px,
-                      minHeight: 32.px,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  ),
+                  prefixIconConstraints: BoxConstraints(
+                    minWidth: 26.px,
+                    minHeight: 32.px,
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 0,
+                    vertical: 0,
                   ),
                 ),
-              ), fillColor: AppColors.blackOverlay.withValues(alpha: 0.10),
+              ),
+            ),
+            fillColor: AppColors.blackOverlay.withValues(alpha: 0.10),
           ),
           SizedBox(height: 2.h),
 
           for (int i = 0; i < _items.length; i++)
             TaskItemTile(
-              backgroundColor:  AppColors.blackOverlay,
+              backgroundColor: AppColors.blackOverlay,
               borderColor: AppColors.white.withValues(alpha: 0.05),
               data: _items[i],
               accentColor: accent,

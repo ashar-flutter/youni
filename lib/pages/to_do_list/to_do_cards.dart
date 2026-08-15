@@ -22,7 +22,7 @@ class ToDoCards extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 7.w),
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.2.h),
             decoration: BoxDecoration(
-              color: AppColors.greyDark.withValues(alpha: 0.67),
+                color: AppColors.charcoal,
               borderRadius: BorderRadius.circular(22),
               border: Border.all(color: AppColors.greyDark, width: 1),
             ),

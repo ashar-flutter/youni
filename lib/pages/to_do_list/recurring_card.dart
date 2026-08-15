@@ -42,7 +42,7 @@ class _RecurringCardState extends State<RecurringCard> {
 
   @override
   Widget build(BuildContext context) {
-    const Color accent = Color(0xFFAB47BC);
+    const Color accent = AppColors.lightPurple;
 
     return Container(
       width: double.infinity,
