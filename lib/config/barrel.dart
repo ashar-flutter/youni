@@ -7,6 +7,12 @@ export 'package:flutter/gestures.dart';
 // getX -
 export 'package:get/get.dart' hide ScreenType;
 
+
+// controllers
+export 'package:youni/controllers/ui_controller.dart';
+
+
+
 // responsive sizer
 export 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -31,6 +37,10 @@ export 'package:youni/pages/settings/account_info.dart';
 export 'package:youni/pages/drafts/drafts.dart';
 export 'package:youni/pages/to_do_list/to_do_list.dart';
 export 'package:youni/pages/tree_view/tree_view.dart';
+export'package:youni/pages/to_do_list/to_do_cards.dart';
+export 'package:youni/pages/to_do_list/recurring_card.dart';
+export 'package:youni/pages/to_do_list/active_card.dart';
+export 'package:youni/pages/to_do_list/completed_card.dart';
 
 export 'package:youni/pages/auth/login.dart';
 export 'package:youni/pages/auth/register.dart';
@@ -60,4 +70,5 @@ export 'package:youni/widgets/main_app_bar.dart';
 export 'package:youni/widgets/lunar_card.dart';
 export 'package:youni/widgets/popular_card.dart';
 export 'package:youni/widgets/plan_button.dart';
+export 'package:youni/widgets/task_card_widgets.dart';
 

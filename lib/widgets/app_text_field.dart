@@ -38,6 +38,9 @@ class AppTextField extends StatefulWidget {
   final double? hintSize;
   final double? textSize;
 
+  // ✅ Naya — Label aur TextField ke beech gap
+  final double? labelGap;
+
   const AppTextField({
     super.key,
     this.hintText,
@@ -75,6 +78,7 @@ class AppTextField extends StatefulWidget {
     this.labelSize,
     this.hintSize,
     this.textSize,
+    this.labelGap,
   });
 
   @override
@@ -105,6 +109,7 @@ class _AppTextFieldState extends State<AppTextField> {
     final double labelFontSize = widget.labelSize ?? 16.sp;
     final double hintFontSize = widget.hintSize ?? 16.sp;
     final double textFontSize = widget.textSize ?? 16.sp;
+    final double labelGap = widget.labelGap ?? 2.2.h;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,7 +121,7 @@ class _AppTextFieldState extends State<AppTextField> {
             fontWeight: FontWeight.w500,
             color: widget.labelColor ?? AppColors.white,
           ),
-          SizedBox(height: 2.2.h),
+          SizedBox(height: labelGap), // ✅ Ab change ho sakta hai
         ],
         SizedBox(
           height: widget.height ?? 48.px,

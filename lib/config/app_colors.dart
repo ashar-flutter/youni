@@ -29,4 +29,9 @@ class AppColors {
   static const Color deepBlueOverlay = Color(0x331C398E);
   static const Color deepNavy = Color(0xFF080717);
   static const Color calendarBorderBlue = Color(0xFF2B7FFF);
+  static const Color blueOverlay = Color(0x0D2B7FFF);
+  static const Color purpleOverLay = Color(0x0DAD46FF);
+  static const Color greenOverlay = Color(0x0D00C950);
+  static const Color blackOverlay = Color(0x33000000);
+  static const Color darkBlack = Color(0xFF0A0A0A);
 }

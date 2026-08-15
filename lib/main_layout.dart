@@ -2,6 +2,7 @@ import '../config/barrel.dart';
 
 class MainLayout extends StatefulWidget {
   final int initialIndex;
+
   const MainLayout({super.key, this.initialIndex = 0});
 
   @override
@@ -13,7 +14,10 @@ class _MainLayoutState extends State<MainLayout> {
 
   final List<Widget> _screens = const [
     Universe(),
-    ToDoList(),
+    TabHost(
+      tabKey: 'todo',
+      screens: [ToDoList(), ToDoCards()],
+    ),
     Drafts(),
     Archive(),
     TreeView(),
@@ -23,6 +27,16 @@ class _MainLayoutState extends State<MainLayout> {
   void initState() {
     super.initState();
     _currentIndex = widget.initialIndex;
+
+    if (!Get.isRegistered<UiController>()) {
+      Get.put(UiController());
+    }
+  }
+
+  @override
+  void dispose() {
+    Get.delete<UiController>();
+    super.dispose();
   }
 
   @override
@@ -42,5 +56,26 @@ class _MainLayoutState extends State<MainLayout> {
         children: _screens,
       ),
     );
+  }
+}
+
+class TabHost extends StatelessWidget {
+  final String tabKey;
+  final List<Widget> screens;
+
+  const TabHost({
+    super.key,
+    required this.tabKey,
+    required this.screens,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final UiController ui = Get.find<UiController>();
+
+    return Obx(() {
+      final int index = ui.getIndex(tabKey);
+      return IndexedStack(index: index, children: screens);
+    });
   }
 }

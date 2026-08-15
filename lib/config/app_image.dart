@@ -21,6 +21,12 @@ class AppImage {
   static const String itemFiveIcon = "assets/icons/item_five.png";
 
 
+  // card icons
+   static const String completedIcon = "assets/icons/completed.png";
+   static const String activeIcon = "assets/icons/active.png";
+   static const String recurringIcon = "assets/icons/recurring.png";
+
+
   // settings icons
   static const String bellIcon = "assets/icons/bell.png";
   static const String securityIcon = "assets/icons/security.png";

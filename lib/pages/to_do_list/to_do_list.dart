@@ -126,7 +126,7 @@ class _ToDoListState extends State<ToDoList> {
           // Outer Card
           Container(
             width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 5.w),
+            margin: EdgeInsets.symmetric(horizontal: 7.w),
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.2.h),
             decoration: BoxDecoration(
               color: AppColors.greyDark.withValues(alpha: 0.67),
@@ -169,10 +169,13 @@ class _ToDoListState extends State<ToDoList> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           // Close Icon
-                          GestureDetector(
-                            onTap: () {},
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 0.5.w),
+                          Padding(
+                            padding: EdgeInsets.only(right: 0.5.w),
+                            child: onTap(
+                              onTap: () {
+                                final ui = Get.find<UiController>();
+                                ui.navigate('todo', 1);
+                              },
                               child: Icon(
                                 Icons.close_rounded,
                                 size: 4.5.w,
@@ -181,17 +184,13 @@ class _ToDoListState extends State<ToDoList> {
                             ),
                           ),
 
-                          // Vertical gap
                           SizedBox(height: 1.5.h),
 
                           // Add Task Button
                           onTap(
                             onTap: () {},
                             child: Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 2.2.w,
-                                vertical: 0.8.h,
-                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 2.2.w, vertical: 0.8.h),
                               decoration: BoxDecoration(
                                 color: AppColors.blue,
                                 borderRadius: BorderRadius.circular(8),
@@ -199,11 +198,7 @@ class _ToDoListState extends State<ToDoList> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(
-                                    Icons.add_rounded,
-                                    size: 4.w,
-                                    color: AppColors.white,
-                                  ),
+                                  Icon(Icons.add_rounded, size: 4.w, color: AppColors.white),
                                   SizedBox(width: 1.w),
                                   CustomText('Add Task', fontSize: 12.5.sp),
                                 ],
@@ -212,7 +207,7 @@ class _ToDoListState extends State<ToDoList> {
                           ),
                         ],
                       ),
-                    ),
+                    )
                   ],
                 ),
 
