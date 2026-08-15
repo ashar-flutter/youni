@@ -3,7 +3,15 @@ import '../../../config/barrel.dart';
 class SelectTargetEntityDialog extends StatefulWidget {
   const SelectTargetEntityDialog({super.key});
 
-  static Future<void> show(BuildContext context) {
+  static Future<Object?> show(BuildContext context) async {
+    FocusManager.instance.primaryFocus?.unfocus();
+
+    await Future<void>.delayed(
+      const Duration(milliseconds: 700),
+    );
+
+    if (!context.mounted) return null;
+
     return showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -18,17 +26,20 @@ class SelectTargetEntityDialog extends StatefulWidget {
           parent: animation,
           curve: Curves.easeOutCubic,
         );
+
         return SlideTransition(
           position: Tween<Offset>(
             begin: const Offset(0, 0.08),
             end: Offset.zero,
           ).animate(curved),
-          child: FadeTransition(opacity: curved, child: child),
+          child: FadeTransition(
+            opacity: curved,
+            child: child,
+          ),
         );
       },
     );
   }
-
   @override
   State<SelectTargetEntityDialog> createState() =>
       _SelectTargetEntityDialogState();
@@ -216,7 +227,9 @@ class _SelectTargetEntityDialogState extends State<SelectTargetEntityDialog> {
 
             // Scrollable List
             ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 52.h),
+              constraints: BoxConstraints(
+                maxHeight: 52.h,
+              ),
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(

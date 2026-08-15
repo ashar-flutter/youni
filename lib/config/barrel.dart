@@ -43,6 +43,12 @@ export 'package:youni/pages/to_do_list/active_card.dart';
 export 'package:youni/pages/to_do_list/completed_card.dart';
 export 'package:youni/pages/to_do_list/pop_ups/select_target_entity_dialog.dart';
 export 'package:youni/pages/to_do_list/pop_ups/add_new_task_dialog.dart';
+export 'package:youni/pages/entity/create_new_entity_dialog.dart';
+export 'package:youni/pages/entity/tabs/general_tab_view.dart';
+export 'package:youni/pages/entity/tabs/media_tab_view.dart';
+export 'package:youni/pages/entity/tabs/notes_tab_view.dart';
+export 'package:youni/pages/entity/tabs/timeline_tab_view.dart';
+export 'package:youni/pages/entity/tabs/to_do_list_tab_view.dart';
 
 
 

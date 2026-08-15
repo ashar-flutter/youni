@@ -70,7 +70,7 @@ class _ActiveCardState extends State<ActiveCard> {
 
   @override
   Widget build(BuildContext context) {
-    const Color accent = AppColors.lightBlueAccent;
+    const Color accent = AppColors.blueOverlay;
 
     return Container(
       width: double.infinity,
@@ -164,7 +164,7 @@ class _ActiveCardState extends State<ActiveCard> {
                 ),
               ),
             ),
-            fillColor: AppColors.blackOverlay.withValues(alpha: 0.10),
+            fillColor: AppColors.blueOverlay.withValues(alpha: 0.10),
           ),
           SizedBox(height: 2.h),
 

@@ -48,7 +48,9 @@ class NewEntityRow extends StatelessWidget {
                 height: 40.px,
                 borderRadius: 13,
                 text: 'Create New Entity',
-                onPressed: () {},
+                onPressed: () {
+                  CreateNewEntityDialog.show(context);
+                },
                 borderColor: AppColors.primary,
                 backgroundColor: AppColors.dark,
                 fontSize: 13.5.sp,

@@ -56,7 +56,7 @@ class _AddNewTaskDialogState extends State<AddNewTaskDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.transparent,
-      insetPadding: EdgeInsets.symmetric(horizontal: 11.w),
+      insetPadding: EdgeInsets.symmetric(horizontal: 10.w),
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Container(

@@ -42,7 +42,7 @@ class _CompletedCardState extends State<CompletedCard> {
 
   @override
   Widget build(BuildContext context) {
-    const Color accent = AppColors.greenAccent;
+     Color accent = AppColors.green.withValues(alpha: 0.10);
 
     return Container(
       width: double.infinity,

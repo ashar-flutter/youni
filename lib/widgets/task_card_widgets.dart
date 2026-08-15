@@ -43,7 +43,9 @@ class TaskCardHeader extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: accentColor.withValues(alpha: 0.20),
+                    offset: const Offset(0, 0),
                     blurRadius: 10,
+                    spreadRadius: 0,
                   ),
                 ],
               ),
@@ -121,7 +123,7 @@ class TaskItemTile extends StatelessWidget {
     required this.showMoveIcon,
     required this.isExpanded,
     required this.onToggle,
-    this.backgroundColor = const Color(0xFF1B1D24),
+    this.backgroundColor = AppColors.blackOverlay,
     this.borderColor,
     this.borderWidth = 1,
     this.buttonColor = AppColors.blueOverlay,
@@ -139,6 +141,21 @@ class TaskItemTile extends StatelessWidget {
         border: borderColor != null
             ? Border.all(color: borderColor!, width: borderWidth)
             : null,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withValues(alpha: 0.10),
+            offset: const Offset(0, 0.5),
+            blurRadius: 1,
+            spreadRadius: -0.5,
+          ),
+          BoxShadow(
+            color: AppColors.black.withValues(alpha: 0.10),
+            offset: const Offset(0, 0.5),
+            blurRadius: 1.5,
+            spreadRadius: 0,
+          ),
+        ],
+
       ),
       child: Column(
         children: [
