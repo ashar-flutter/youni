@@ -9,6 +9,7 @@ class TimelineTabView extends StatefulWidget {
 
 class _TimelineTabViewState extends State<TimelineTabView> {
   int _selectedStatus = 0;
+bool _emailRemindersEnabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -234,10 +235,16 @@ class _TimelineTabViewState extends State<TimelineTabView> {
               Transform.scale(
                 scale: 0.6,
                 child: Switch.adaptive(
-                  value: true,
-                  onChanged: (v) {},
+                  value: _emailRemindersEnabled,
+                  onChanged: (value) {
+                    setState(() {
+                      _emailRemindersEnabled = value;
+                    });
+                  },
                   activeTrackColor: AppColors.white,
                   activeThumbColor: AppColors.dark,
+                  inactiveTrackColor: AppColors.greyDarkLight,
+                  inactiveThumbColor: AppColors.greyLight,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
               ),

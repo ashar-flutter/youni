@@ -42,4 +42,5 @@ class AppColors {
   static const Color lightPurple = Color(0xFFAB47BC);
   static const Color greenAccent = Color(0xFF66BB6A);
   static const Color lightBlueAcc = Color(0xFF64B5F6);
+  static const Color greyDarkLight = Color(0xFF4A4A4A);
 }

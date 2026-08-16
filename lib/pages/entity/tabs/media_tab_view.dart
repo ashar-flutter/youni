@@ -39,6 +39,24 @@ class MediaTabView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.blue,
                 borderRadius: BorderRadius.circular(9.px),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.black.withValues(alpha: 0.10),
+                      offset: Offset(0, 2.71),
+                      blurRadius: 4.07,
+                      spreadRadius: -2.71,
+                    ),
+                    BoxShadow(
+                      color: AppColors.black.withValues(alpha: 0.10),
+                      offset: Offset(0, 6.78),
+                      blurRadius: 10.18,
+                      spreadRadius: -2.04,
+                    ),
+                  ],
+                border: Border.all(
+                  color: AppColors.white.withValues(alpha: 0.05),
+
+                )
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,

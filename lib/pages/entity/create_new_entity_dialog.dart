@@ -52,10 +52,10 @@ class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
           child: Container(
             width: 90.w,
             decoration: BoxDecoration(
-              color: AppColors.blueOverlay.withValues(alpha: 0.10),
+              color: AppColors.charcoal.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(26),
               border: Border.all(
-                color: AppColors.charcoal,
+                color: AppColors.greyDark,
                 width: 2,
               ),
               boxShadow: [
@@ -94,14 +94,15 @@ class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
                           children: [
                             CustomText(
                               'Create New Entity',
-                              fontSize: 14.px,
+                              fontSize: 13.px,
                             ),
                             SizedBox(height: 0.4.h),
                             CustomText(
                               'Create a new star (project) or comet (personal item)',
-                              fontSize: 12.px,
+                              fontSize: 8.5.px,
                               fontWeight: FontWeight.w400,
-                              color: AppColors.white.withValues(alpha: 0.50),
+                              color: AppColors.white.withValues(alpha: 0.70),
+                              maxLines: 1,
                             ),
                           ],
                         ),
@@ -214,7 +215,7 @@ class _CustomEntityTabBar extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 42.px,
-      color: const Color(0xFF2B2C30),
+      color: AppColors.greyDarkLight,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
@@ -259,15 +260,15 @@ class _CustomEntityTabBar extends StatelessWidget {
   }) {
     final bool isSelected = selectedTab == type;
 
-    return GestureDetector(
+    return onTap(
       onTap: () => onTabChanged(type),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         margin: EdgeInsets.only(right: 2.w),
-        padding: EdgeInsets.symmetric(horizontal: 12.px, vertical: 6.px),
+        padding: EdgeInsets.symmetric(horizontal: 11.6.px, vertical: 5.px),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppColors.white.withValues(alpha: 0.15)
+              ? AppColors.charcoal
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8.px),
         ),
@@ -276,16 +277,16 @@ class _CustomEntityTabBar extends StatelessWidget {
           children: [
             Icon(
               icon,
-              size: 14.px,
+              size: 13.px,
               color: isSelected
                   ? AppColors.white
                   : AppColors.white.withValues(alpha: 0.45),
             ),
-            SizedBox(width: 6.px),
+            SizedBox(width: 4.px),
             CustomText(
               title,
-              fontSize: 12.5.px,
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+              fontSize: 12.px,
+              fontWeight:  FontWeight.w400,
               color: isSelected
                   ? AppColors.white
                   : AppColors.white.withValues(alpha: 0.45),
