@@ -136,7 +136,6 @@ class _ToDoListState extends State<ToDoList> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 1.2.h),
                 // ── Header: Title, Subtitle, Close Icon, Add Task Button ──
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,56 +162,55 @@ class _ToDoListState extends State<ToDoList> {
                         ],
                       ),
                     ),
-                    Transform.translate(
-                      offset: Offset(0, -1.5.h),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          // Close Icon
-                          Padding(
-                            padding: EdgeInsets.only(right: 0.5.w),
-                            child: onTap(
-                              onTap: () {
-                                final ui = Get.find<UiController>();
-                                ui.navigate('todo', 1);
-                              },
-                              child: Icon(
-                                Icons.close_rounded,
-                                size: 4.5.w,
-                                color: AppColors.white,
-                              ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        // Close Icon - Exact same layout position without touch area shifting
+                        GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            final ui = Get.find<UiController>();
+                            ui.navigate('todo', 1);
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 0.5.w, bottom: 0.5.h),
+                            child: Icon(
+                              Icons.close_rounded,
+                              size: 4.5.w,
+                              color: AppColors.white,
                             ),
                           ),
+                        ),
 
-                          SizedBox(height: 1.5.h),
+                        SizedBox(height: 1.h),
 
-                          // Add Task Button
-                          onTap(
-                            onTap: () {
-                              AddNewTaskDialog.show(context);
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 2.2.w, vertical: 0.8.h),
-                              decoration: BoxDecoration(
-                                color: AppColors.blue,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(Icons.add_rounded, size: 4.w, color: AppColors.white),
-                                  SizedBox(width: 1.w),
-                                  CustomText('Add Task', fontSize: 12.5.sp),
-                                ],
-                              ),
+                        // Add Task Button
+                        onTap(
+                          onTap: () {
+                            AddNewTaskDialog.show(context);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 2.2.w, vertical: 0.8.h),
+                            decoration: BoxDecoration(
+                              color: AppColors.blue,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.add_rounded, size: 4.w, color: AppColors.white),
+                                SizedBox(width: 1.w),
+                                CustomText('Add Task', fontSize: 12.5.sp),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     )
                   ],
                 ),
 
+                SizedBox(height: 1.5.h,),
                 // ── Horizontal Divider Line ──
                 SizedBox(
                   height: 1,
