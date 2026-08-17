@@ -31,10 +31,9 @@ extension OrbitStatusColor on OrbitStatus {
   }
 }
 
-/// A single entity on the orbit map. All positions are FRACTIONS
-/// (0..1) of the diagram's width/height — this is intentional so
-/// a backend can later replace `_defaultBodies` with real
-/// (x, y) / angle-derived positions without touching the widget.
+/// A single entity on the orbit map. Positions are FRACTIONS (0..1)
+/// of the diagram's width/height so a backend can later swap this
+/// list for real data without touching the widgets.
 class OrbitBody {
   final String id;
   final String label;
@@ -43,7 +42,6 @@ class OrbitBody {
   final OrbitStatus status;
   final String? imagePath; // null => plain dot marker (Start/End point)
   final double markerSize;
-  final bool hasRingBorder;
   final bool showSatelliteDot;
   final int? badgeCount;
 
@@ -55,21 +53,29 @@ class OrbitBody {
     required this.status,
     this.imagePath,
     this.markerSize = 34,
-    this.hasRingBorder = false,
     this.showSatelliteDot = false,
     this.badgeCount,
   });
 }
 
+/// A short indicator stub (e.g. "Start Point" tick) — anchored to a
+/// fractional point, drawn along `angleDeg` for `lengthFactor` of the
+/// diagram's shorter side. Fully data-driven for backend use.
 class OrbitConnector {
-  final Offset from;
-  final Offset to;
+  final Offset anchorFraction;
+  final double angleDeg;
+  final double lengthFactor;
   final Color color;
+  final bool dotAtEnd;
+  final double dotSize;
 
   const OrbitConnector({
-    required this.from,
-    required this.to,
+    required this.anchorFraction,
+    required this.angleDeg,
+    required this.lengthFactor,
     required this.color,
+    this.dotAtEnd = false,
+    this.dotSize = 7,
   });
 }
 
@@ -111,7 +117,6 @@ class UniverseOrbitDiagram extends StatelessWidget {
           return Stack(
             clipBehavior: Clip.none,
             children: [
-              // Background stars
               for (final s in _stars)
                 Positioned(
                   left: s.dx * w - 1.5,
@@ -126,19 +131,16 @@ class UniverseOrbitDiagram extends StatelessWidget {
                   ),
                 ),
 
-              // Rings + green wedge (behind everything)
               CustomPaint(
                 size: Size(w, h),
                 painter: _RingsWedgePainter(centerFraction: centerFraction),
               ),
 
-              // Connector lines
               CustomPaint(
                 size: Size(w, h),
                 painter: _ConnectorsPainter(connectors: connectors),
               ),
 
-              // Center avatar with glow
               Positioned(
                 left: centerFraction.dx * w - (h * 0.14),
                 top: centerFraction.dy * h - (h * 0.14),
@@ -165,7 +167,6 @@ class UniverseOrbitDiagram extends StatelessWidget {
                 ),
               ),
 
-              // Bodies (spheres/dots + labels)
               for (final body in bodies) ...[
                 Positioned(
                   left: body.markerPosition.dx * w - body.markerSize / 2,
@@ -196,25 +197,12 @@ class _OrbitMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Image markers already have their status ring baked into the
+    // asset — no extra border/glow is drawn on top of them.
     final Widget core = body.imagePath != null
-        ? Container(
+        ? SizedBox(
       width: body.markerSize,
       height: body.markerSize,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: body.hasRingBorder
-            ? Border.all(color: body.status.color, width: 2)
-            : null,
-        boxShadow: !body.hasRingBorder
-            ? [
-          BoxShadow(
-            color: body.status.color.withValues(alpha: 0.6),
-            blurRadius: 10,
-            spreadRadius: 1,
-          ),
-        ]
-            : null,
-      ),
       child: ClipOval(
         child: Image.asset(body.imagePath!, fit: BoxFit.cover),
       ),
@@ -245,8 +233,8 @@ class _OrbitMarker extends StatelessWidget {
             right: -1,
             bottom: -1,
             child: Container(
-              width: body.markerSize * 0.28,
-              height: body.markerSize * 0.28,
+              width: body.markerSize * 0.26,
+              height: body.markerSize * 0.26,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColors.blueBright,
@@ -256,11 +244,11 @@ class _OrbitMarker extends StatelessWidget {
           ),
         if (body.badgeCount != null)
           Positioned(
-            right: -4,
-            top: -4,
+            right: -6,
+            top: -6,
             child: Container(
-              padding: const EdgeInsets.all(3),
-              constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+              padding: const EdgeInsets.all(3.5),
+              constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
               decoration: BoxDecoration(
                 color: AppColors.red,
                 shape: BoxShape.circle,
@@ -269,7 +257,7 @@ class _OrbitMarker extends StatelessWidget {
               child: Center(
                 child: CustomText(
                   '${body.badgeCount}',
-                  fontSize: 8.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.w700,
                   color: AppColors.white,
                 ),
@@ -289,14 +277,14 @@ class _OrbitLabelPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.65),
         borderRadius: BorderRadius.circular(6),
       ),
       child: CustomText(
         text,
-        fontSize: 10.sp,
+        fontSize: 12.sp,
         fontWeight: FontWeight.w500,
         color: AppColors.white,
       ),
@@ -319,9 +307,9 @@ class _RingsWedgePainter extends CustomPainter {
     );
     final double baseRadius = math.min(size.width, size.height) / 2;
 
-    // Green wedge (fan) pointing toward the upper-left, behind rings
-    final double outerRadius = _ringFactors.first * baseRadius;
-    final Rect wedgeRect = Rect.fromCircle(center: center, radius: outerRadius);
+    // Wedge extends slightly PAST the outermost ring, as in the design.
+    final double wedgeRadius = baseRadius * 1.05;
+    final Rect wedgeRect = Rect.fromCircle(center: center, radius: wedgeRadius);
     final Paint wedgePaint = Paint()
       ..shader = RadialGradient(
         colors: [
@@ -336,7 +324,6 @@ class _RingsWedgePainter extends CustomPainter {
       ..close();
     canvas.drawPath(wedgePath, wedgePaint);
 
-    // Concentric rings
     final Paint ringPaint = Paint()
       ..color = AppColors.gold.withValues(alpha: 0.55)
       ..style = PaintingStyle.stroke
@@ -361,15 +348,25 @@ class _ConnectorsPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    final double baseLength = math.min(size.width, size.height);
+
     for (final c in connectors) {
-      final Paint paint = Paint()
-        ..color = c.color.withValues(alpha: 0.85)
-        ..strokeWidth = 1.4;
-      canvas.drawLine(
-        Offset(c.from.dx * size.width, c.from.dy * size.height),
-        Offset(c.to.dx * size.width, c.to.dy * size.height),
-        paint,
+      final Offset anchor = Offset(
+        c.anchorFraction.dx * size.width,
+        c.anchorFraction.dy * size.height,
       );
+      final double rad = c.angleDeg * math.pi / 180;
+      final Offset end = anchor +
+          Offset(math.cos(rad), math.sin(rad)) * (c.lengthFactor * baseLength);
+
+      final Paint linePaint = Paint()
+        ..color = c.color.withValues(alpha: 0.9)
+        ..strokeWidth = 1.4;
+      canvas.drawLine(anchor, end, linePaint);
+
+      if (c.dotAtEnd) {
+        canvas.drawCircle(end, c.dotSize / 2, Paint()..color = c.color);
+      }
     }
   }
 

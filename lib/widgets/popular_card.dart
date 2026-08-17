@@ -125,31 +125,31 @@ class _PopularCardState extends State<PopularCard> {
                   SizedBox(height: 3.2.h),
                   Row(
                     children:
-                        const [
-                              FeatureIcon(
-                                iconPath: AppImage.robotIcon,
-                                color: AppColors.green,
-                              ),
-                              FeatureIcon(
-                                iconPath: AppImage.chatIcon,
-                                color: AppColors.primary,
-                              ),
-                              FeatureIcon(
-                                iconPath: AppImage.audioCallIcon,
-                                color: AppColors.purple,
-                              ),
-                              FeatureIcon(
-                                iconPath: AppImage.videoCallIcon,
-                                color: AppColors.orange,
-                              ),
-                            ]
-                            .map(
-                              (icon) => Padding(
-                                padding: EdgeInsets.only(right: 3.w),
-                                child: icon,
-                              ),
-                            )
-                            .toList(),
+                    const [
+                      FeatureIcon(
+                        iconPath: AppImage.robotIcon,
+                        color: AppColors.green,
+                      ),
+                      FeatureIcon(
+                        iconPath: AppImage.chatIcon,
+                        color: AppColors.primary,
+                      ),
+                      FeatureIcon(
+                        iconPath: AppImage.audioCallIcon,
+                        color: AppColors.purple,
+                      ),
+                      FeatureIcon(
+                        iconPath: AppImage.videoCallIcon,
+                        color: AppColors.orange,
+                      ),
+                    ]
+                        .map(
+                          (icon) => Padding(
+                        padding: EdgeInsets.only(right: 3.w),
+                        child: icon,
+                      ),
+                    )
+                        .toList(),
                   ),
 
                   SizedBox(height: 3.h),
@@ -157,59 +157,59 @@ class _PopularCardState extends State<PopularCard> {
                   // Feature List
                   Column(
                     children:
-                        const [
-                              'All Free Features',
-                              'ChatGPT AI Assistant',
-                              'Real-time Chat Messages',
-                              'Voice Call Support',
-                              'Video Call Support',
-                              'Access to your Universe',
-                              'Advanced To-Do-List',
-                            ]
-                            .map(
-                              (feature) => Padding(
-                                padding: EdgeInsets.only(bottom: 2.h),
-                                child: Row(
-                                  children: [
-                                    SizedBox(width: 2.w),
-                                    Container(
-                                      width: 6.w,
-                                      height: 6.w,
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            AppColors.purpleOverlay.withValues(
-                                              alpha: 0.30,
-                                            ),
-                                            AppColors.magentaOverlay.withValues(
-                                              alpha: 0.30,
-                                            ),
-                                          ],
-                                        ),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        Icons.check,
-                                        size: 3.20.w,
-                                        color: AppColors.white,
-                                      ),
+                    const [
+                      'All Free Features',
+                      'ChatGPT AI Assistant',
+                      'Real-time Chat Messages',
+                      'Voice Call Support',
+                      'Video Call Support',
+                      'Access to your Universe',
+                      'Advanced To-Do-List',
+                    ]
+                        .map(
+                          (feature) => Padding(
+                        padding: EdgeInsets.only(bottom: 2.h),
+                        child: Row(
+                          children: [
+                            SizedBox(width: 2.w),
+                            Container(
+                              width: 6.w,
+                              height: 6.w,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    AppColors.purpleOverlay.withValues(
+                                      alpha: 0.30,
                                     ),
-                                    SizedBox(width: 3.2.w),
-                                    Expanded(
-                                      child: CustomText(
-                                        feature,
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: AppColors.white
-                                      ),
+                                    AppColors.magentaOverlay.withValues(
+                                      alpha: 0.30,
                                     ),
                                   ],
                                 ),
+                                shape: BoxShape.circle,
                               ),
-                            )
-                            .toList(),
+                              child: Icon(
+                                Icons.check,
+                                size: 3.20.w,
+                                color: AppColors.white,
+                              ),
+                            ),
+                            SizedBox(width: 3.2.w),
+                            Expanded(
+                              child: CustomText(
+                                feature,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                        .toList(),
                   ),
 
                   // Conditional Plan Button with "Upgrade to Pro" Text
@@ -220,9 +220,14 @@ class _PopularCardState extends State<PopularCard> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 3.w),
                         child: PlanButton(
-                          onTap: widget.onPlanButtonTap,
                           height: 55.px,
                           text: "Upgrade to Pro",
+                          onInitialTap: () async {
+                            if (widget.onPlanButtonTap != null) {
+                              widget.onPlanButtonTap!();
+                            }
+                            await YouniProSubscriptionDialog.show();
+                          },
                         ),
                       ),
                     ),

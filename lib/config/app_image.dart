@@ -32,6 +32,7 @@ class AppImage {
    static const String completedIcon = "assets/icons/completed.png";
    static const String activeIcon = "assets/icons/active.png";
    static const String recurringIcon = "assets/icons/recurring.png";
+   static const String paymentIcon = "assets/icons/payment.png";
 
 
   // settings icons

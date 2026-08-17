@@ -4,7 +4,7 @@ class Drafts extends StatelessWidget {
   const Drafts({super.key});
 
   // Toggle this to preview the empty-state vs the populated-state.
-  static const bool _hasDrafts = false;
+  static const bool _hasDrafts = true;
 
   static const List<Map<String, dynamic>> _drafts = [
     {

@@ -13,9 +13,8 @@ class OrbitLegend extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 3.w),
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.6.h),
       decoration: BoxDecoration(
         color: AppColors.darkBackground.withValues(alpha: 0.85),
         borderRadius: BorderRadius.circular(14),
@@ -29,12 +28,12 @@ class OrbitLegend extends StatelessWidget {
         children: [
           for (int i = 0; i < _entries.length; i++)
             Padding(
-              padding: EdgeInsets.only(bottom: i == _entries.length - 1 ? 0 : 1.5.h),
+              padding: EdgeInsets.only(bottom: i == _entries.length - 1 ? 0 : 0.9.h),
               child: Row(
                 children: [
                   Container(
-                    width: 3.3.w,
-                    height: 3.3.w,
+                    width: 3.w,
+                    height: 3.w,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: _entries[i].color,
@@ -43,7 +42,7 @@ class OrbitLegend extends StatelessWidget {
                   SizedBox(width: 2.5.w),
                   CustomText(
                     _entries[i].label,
-                    fontSize: 13.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     color: AppColors.white.withValues(alpha: 0.85),
                   ),
@@ -109,8 +108,6 @@ class UniverseTimeRangeTabBar extends StatelessWidget {
   }
 }
 
-/// Owns the selected time-range and rebuilds ONLY the diagram+tabs
-/// subtree — the rest of Universe stays untouched.
 class UniverseOrbitSection extends StatefulWidget {
   const UniverseOrbitSection({super.key});
 
@@ -123,9 +120,8 @@ class _UniverseOrbitSectionState extends State<UniverseOrbitSection> {
 
   static const Offset _centerFraction = Offset(0.45, 0.52);
 
-  // TODO(backend): replace this with data fetched per `_selectedRange`.
-  // Structure is already position/status/badge driven — swap the list,
-  // nothing in the widgets needs to change.
+  // TODO(backend): replace with data fetched per `_selectedRange` —
+  // structure is position/status/badge driven, nothing else changes.
   List<OrbitBody> _bodiesForRange(String range) {
     return const [
       OrbitBody(
@@ -135,7 +131,7 @@ class _UniverseOrbitSectionState extends State<UniverseOrbitSection> {
         labelPosition: Offset(0.244, 0.255),
         status: OrbitStatus.personnelEvent,
         imagePath: AppImage.routineAndGoal,
-        markerSize: 34,
+        markerSize: 26,
       ),
       OrbitBody(
         id: 'personal_goal',
@@ -144,7 +140,7 @@ class _UniverseOrbitSectionState extends State<UniverseOrbitSection> {
         labelPosition: Offset(0.602, 0.735),
         status: OrbitStatus.personnelEvent,
         imagePath: AppImage.routineAndGoal,
-        markerSize: 30,
+        markerSize: 24,
       ),
       OrbitBody(
         id: 'project_alpha',
@@ -153,8 +149,7 @@ class _UniverseOrbitSectionState extends State<UniverseOrbitSection> {
         labelPosition: Offset(0.822, 0.765),
         status: OrbitStatus.inProgress,
         imagePath: AppImage.projectAlpha,
-        markerSize: 46,
-        hasRingBorder: true,
+        markerSize: 36,
       ),
       OrbitBody(
         id: 'project_beta',
@@ -163,8 +158,7 @@ class _UniverseOrbitSectionState extends State<UniverseOrbitSection> {
         labelPosition: Offset(0.081, 0.785),
         status: OrbitStatus.notStarted,
         imagePath: AppImage.projectBeta,
-        markerSize: 46,
-        hasRingBorder: true,
+        markerSize: 36,
         showSatelliteDot: true,
         badgeCount: 3,
       ),
@@ -174,35 +168,38 @@ class _UniverseOrbitSectionState extends State<UniverseOrbitSection> {
         markerPosition: Offset(0.834, 0.538),
         labelPosition: Offset(0.918, 0.538),
         status: OrbitStatus.dedicatedSpot,
-        markerSize: 10,
+        markerSize: 9,
       ),
       OrbitBody(
         id: 'end_point',
         label: 'End Point',
         markerPosition: Offset(0.451, 0.715),
-        labelPosition: Offset(0.373, 0.715),
+        labelPosition: Offset(0.373, 0.680),
         status: OrbitStatus.dedicatedSpot,
-        markerSize: 10,
+        markerSize: 9,
       ),
     ];
   }
 
+  // Short indicator stubs only — no line above Start Point, no
+  // circle-like loop. Each is anchor + direction + length.
   List<OrbitConnector> _connectorsForRange(String range) {
     return const [
+      // Start Point: a short line pointing DOWN toward the ring — nothing above it.
       OrbitConnector(
-        from: Offset(0.834, 0.538),
-        to: Offset(0.822, 0.660),
+        anchorFraction: Offset(0.834, 0.538),
+        angleDeg: 90,
+        lengthFactor: 0.075,
         color: AppColors.green,
       ),
+      // End Point: a short line pointing RIGHT, with a dot at its tip.
       OrbitConnector(
-        from: Offset(0.373, 0.715),
-        to: Offset(0.451, 0.715),
+        anchorFraction: Offset(0.451, 0.715),
+        angleDeg: 0,
+        lengthFactor: 0.075,
         color: AppColors.orange,
-      ),
-      OrbitConnector(
-        from: Offset(0.451, 0.715),
-        to: Offset(0.45, 0.60),
-        color: AppColors.orange,
+        dotAtEnd: true,
+        dotSize: 8,
       ),
     ];
   }
@@ -212,12 +209,9 @@ class _UniverseOrbitSectionState extends State<UniverseOrbitSection> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 4.w),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           const OrbitLegend(),
-
-          SizedBox(height: 4.h),
-
+          SizedBox(height: 2.h),
           UniverseOrbitDiagram(
             centerFraction: _centerFraction,
             bodies: _bodiesForRange(_selectedRange),
@@ -226,15 +220,11 @@ class _UniverseOrbitSectionState extends State<UniverseOrbitSection> {
             'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
             height: 38.h,
           ),
-
-          SizedBox(height: 5.h),
-
+          SizedBox(height: 2.h),
           UniverseTimeRangeTabBar(
             selected: _selectedRange,
             onChanged: (value) => setState(() => _selectedRange = value),
           ),
-
-          SizedBox(height: 9.h),
         ],
       ),
     );

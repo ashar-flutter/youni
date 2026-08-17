@@ -173,10 +173,14 @@ class LunarCard extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 3.w),
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
                         child: PlanButton(
-                          onTap: onPlanButtonTap,
                           height: 55.px,
+                          text: 'Current Plan',
+                          onInitialTap: () async {
+                            if (onPlanButtonTap != null) onPlanButtonTap!();
+                            await FreeLunarSubscriptionDialog.show();
+                          },
                         ),
                       ),
                     ),

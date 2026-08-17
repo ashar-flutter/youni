@@ -2,14 +2,16 @@ import '../config/barrel.dart';
 
 class PlanButton extends StatefulWidget {
   final String text;
-  final VoidCallback? onTap;
+  final Future<void> Function()? onInitialTap;
+  final VoidCallback? onCancelConfirm;
   final double? width;
   final double? height;
 
   const PlanButton({
     super.key,
     this.text = 'Current Plan',
-    this.onTap,
+    this.onInitialTap,
+    this.onCancelConfirm,
     this.width,
     this.height,
   });
@@ -29,17 +31,26 @@ class _PlanButtonState extends State<PlanButton> {
     }
   }
 
-  void _handleTap() {
+  Future<void> _handleTap() async {
     if (!_isCancelMode) {
-      setState(() {
-        _isCancelMode = true;
-      });
-      if (widget.onTap != null) widget.onTap!();
+      // Step 1: Open Subscription Dialog and wait until closed/backed
+      if (widget.onInitialTap != null) {
+        await widget.onInitialTap!();
+      }
+
+      // Step 2: On returning back, set state to 'Cancel Subscription'
+      if (mounted) {
+        setState(() {
+          _isCancelMode = true;
+        });
+      }
     } else {
+      // Step 3: Trigger Cancel Subscription Pop-Up
       SettingPopUp.show(
         type: SettingPopUpType.cancelSubscription,
         onConfirm: () {
           _resetButtonState();
+          if (widget.onCancelConfirm != null) widget.onCancelConfirm!();
         },
         onCancel: () {
           _resetButtonState();
@@ -56,21 +67,21 @@ class _PlanButtonState extends State<PlanButton> {
 
     final Gradient currentGradient = _isCancelMode
         ? const LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              AppColors.mutedRoseGray,
-
-              AppColors.black],
-          )
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+      colors: [
+        AppColors.mutedRoseGray,
+        AppColors.black,
+      ],
+    )
         : const LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              AppColors.blue,
-              AppColors.magenta
-            ],
-          );
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+      colors: [
+        AppColors.blue,
+        AppColors.magenta,
+      ],
+    );
 
     return Container(
       width: widget.width ?? double.infinity,

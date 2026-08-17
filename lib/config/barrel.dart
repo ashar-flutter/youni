@@ -49,6 +49,9 @@ export 'package:youni/pages/entity/entity_selection_box.dart';
 export 'package:youni/pages/entity/tabs/to_do_list_tab_view.dart';
 export 'package:youni/pages/universe/initial/welcome_universe_dialog.dart';
 export 'package:youni/pages/entity/tabs/delete_entity_dialog.dart';
+export  '../pages/settings/pop_up/free_lunar_subscription_dialog.dart';
+export  '../pages/settings/pop_up/youni_pro_subscription_dialog.dart';
+
 
 
 
