@@ -1,23 +1,25 @@
 import '../../../config/barrel.dart';
 
 class CreateNewEntityDialog extends StatefulWidget {
-  const CreateNewEntityDialog({super.key});
+  final String? title;
 
-  static Future<void> show(BuildContext context) {
-    return showGeneralDialog(
-      context: context,
+  const CreateNewEntityDialog({super.key, this.title});
+
+  static Future<void> show(BuildContext context, {String? title}) {
+    return Get.generalDialog(
       barrierDismissible: true,
       barrierLabel: '',
       barrierColor: Colors.black.withValues(alpha: 0.60),
       transitionDuration: const Duration(milliseconds: 280),
       pageBuilder: (context, animation, secondaryAnimation) {
-        return const CreateNewEntityDialog();
+        return CreateNewEntityDialog(title: title);
       },
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         final curved = CurvedAnimation(
           parent: animation,
           curve: Curves.easeOutCubic,
         );
+
         return SlideTransition(
           position: Tween<Offset>(
             begin: const Offset(0, 0.08),
@@ -37,15 +39,15 @@ enum EntityTabType { general, timeline, media, notes, toDoList }
 
 class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
   EntityTabType _selectedTab = EntityTabType.general;
+  bool _showDeleteMenu = false;
 
   @override
   Widget build(BuildContext context) {
+    final bool isSelectionMode = widget.title != null;
+
     return Dialog(
       backgroundColor: Colors.transparent,
-      insetPadding: EdgeInsets.symmetric(
-        horizontal: 9.w,
-        vertical: 2.h,
-      ),
+      insetPadding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 2.h),
       child: Center(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -54,10 +56,7 @@ class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
             decoration: BoxDecoration(
               color: AppColors.charcoal.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(26),
-              border: Border.all(
-                color: AppColors.greyDark,
-                width: 2,
-              ),
+              border: Border.all(color: AppColors.greyDark, width: 2),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.black.withValues(alpha: 0.10),
@@ -93,22 +92,28 @@ class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomText(
-                              'Create New Entity',
+                              widget.title ?? 'Create New Entity',
                               fontSize: 13.px,
                             ),
-                            SizedBox(height: 0.4.h),
-                            CustomText(
-                              'Create a new star (project) or comet (personal item)',
-                              fontSize: 8.5.px,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.white.withValues(alpha: 0.70),
-                              maxLines: 1,
-                            ),
+
+                            // Subtitle ONLY in normal mode
+                            if (!isSelectionMode) ...[
+                              SizedBox(height: 0.4.h),
+                              CustomText(
+                                'Create a new star (project) or comet (personal item)',
+                                fontSize: 8.5.px,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.white.withValues(alpha: 0.70),
+                                maxLines: 1,
+                              ),
+                            ],
                           ],
                         ),
                       ),
+
                       SizedBox(width: 2.w),
-                     onTap(
+
+                      onTap(
                         onTap: () => Get.back(),
                         child: Padding(
                           padding: EdgeInsets.only(top: 2.px),
@@ -123,12 +128,122 @@ class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
                   ),
                 ),
 
-             SizedBox(height: 1.h,),
+                // Divider line below header
+                Divider(
+                  color: AppColors.white.withValues(alpha: 0.12),
+                  height: 1.px,
+                  thickness: 1.px,
+                ),
 
-                // Horizontal Tab Bar
-                _CustomEntityTabBar(
-                  selectedTab: _selectedTab,
-                  onTabChanged: (tab) => setState(() => _selectedTab = tab),
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // 3-Dots Button (Only in selection mode)
+                        if (isSelectionMode) ...[
+                          SizedBox(height: 0.8.h),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: onTap(
+                                onTap: () {
+                                  setState(() {
+                                    _showDeleteMenu = !_showDeleteMenu;
+                                  });
+                                },
+                                child: Container(
+                                  width: 17.px,
+                                  height: 24.px,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.charcoal.withValues(
+                                      alpha: 0.80,
+                                    ),
+                                    borderRadius: BorderRadius.circular(4.px),
+                                  ),
+                                  child: Icon(
+                                    Icons.more_vert_rounded,
+                                    size: 14.px,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 0.8.h),
+                        ],
+
+                        // Horizontal Tab Bar
+                        _CustomEntityTabBar(
+                          selectedTab: _selectedTab,
+                          onTabChanged: (tab) {
+                            setState(() {
+                              _selectedTab = tab;
+                              _showDeleteMenu = false;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+
+                    // Delete Popup Menu (Floating OVER the TabBar)
+                    if (_showDeleteMenu && isSelectionMode)
+                      Positioned(
+                        right: 8.w,
+                        top: 28.px,
+                        child: onTap(
+                          onTap: () {
+                            setState(() => _showDeleteMenu = false);
+
+                            // Call Delete Entity Dialog
+                            DeleteEntityDialog.show(onConfirm: () {});
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.px,
+                              vertical: 6.px,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.charcoal,
+                              borderRadius: BorderRadius.circular(9.px),
+                              border: Border.all(
+                                color: AppColors.white.withValues(alpha: 0.20),
+                                width: 1.px,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.black.withValues(
+                                    alpha: 0.50,
+                                  ),
+                                  blurRadius: 14.px,
+                                  spreadRadius: 1.px,
+                                  offset: Offset(0, 6.px),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.delete_outline_rounded,
+                                  size: 13.px,
+                                  color: AppColors.white,
+                                ),
+                                SizedBox(width: 4.px),
+                                CustomText(
+                                  'Delete',
+                                  fontSize: 10.px,
+                                  color: AppColors.red,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
 
                 SizedBox(height: 1.8.h),
@@ -136,7 +251,7 @@ class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
                 // Tab Content Area
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 5.w),
-                  child: _buildSelectedTabContent(),
+                  child: _buildSelectedTabContent(isSelectionMode),
                 ),
 
                 SizedBox(height: 2.h),
@@ -153,15 +268,26 @@ class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
                       Expanded(
                         child: AppButton(
                           height: 40.px,
-                          text: 'Create Entity',
+                          text: isSelectionMode ? 'Save' : 'Create Entity',
                           fontSize: 14.sp,
                           backgroundColor: AppColors.blue,
                           textColor: AppColors.white,
                           borderRadius: 14,
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.back();
+
+                            // Navigation ONLY in Normal Mode
+                            if (!isSelectionMode) {
+                              Future.delayed(const Duration(seconds: 1), () {
+                                EntitySelectionBox.show();
+                              });
+                            }
+                          },
                         ),
                       ),
+
                       SizedBox(width: 3.w),
+
                       Expanded(
                         child: AppButton(
                           height: 40.px,
@@ -176,7 +302,8 @@ class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
                     ],
                   ),
                 ),
-                SizedBox(height: 1.h,),
+
+                SizedBox(height: 1.h),
               ],
             ),
           ),
@@ -185,18 +312,22 @@ class _CreateNewEntityDialogState extends State<CreateNewEntityDialog> {
     );
   }
 
-  Widget _buildSelectedTabContent() {
+  Widget _buildSelectedTabContent(bool isSelectionMode) {
     switch (_selectedTab) {
       case EntityTabType.general:
-        return const GeneralTabView();
+        return GeneralTabView(isSelectionMode: isSelectionMode);
+
       case EntityTabType.timeline:
-        return const TimelineTabView();
+        return TimelineTabView(isSelectionMode: isSelectionMode);
+
       case EntityTabType.media:
-        return const MediaTabView();
+        return MediaTabView(isSelectionMode: isSelectionMode);
+
       case EntityTabType.notes:
-        return const NotesTabView();
+        return NotesTabView(isSelectionMode: isSelectionMode);
+
       case EntityTabType.toDoList:
-        return const ToDoListTabView();
+        return ToDoListTabView(isSelectionMode: isSelectionMode);
     }
   }
 }
@@ -267,9 +398,7 @@ class _CustomEntityTabBar extends StatelessWidget {
         margin: EdgeInsets.only(right: 2.w),
         padding: EdgeInsets.symmetric(horizontal: 11.6.px, vertical: 5.px),
         decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.charcoal
-              : Colors.transparent,
+          color: isSelected ? AppColors.charcoal : Colors.transparent,
           borderRadius: BorderRadius.circular(8.px),
         ),
         child: Row(
@@ -286,7 +415,7 @@ class _CustomEntityTabBar extends StatelessWidget {
             CustomText(
               title,
               fontSize: 12.px,
-              fontWeight:  FontWeight.w400,
+              fontWeight: FontWeight.w400,
               color: isSelected
                   ? AppColors.white
                   : AppColors.white.withValues(alpha: 0.45),

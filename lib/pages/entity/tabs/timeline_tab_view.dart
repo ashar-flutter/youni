@@ -1,22 +1,73 @@
 import '../../../config/barrel.dart';
 
 class TimelineTabView extends StatefulWidget {
-  const TimelineTabView({super.key});
+  final bool isSelectionMode;
+
+  const TimelineTabView({
+    super.key,
+    this.isSelectionMode = false,
+  });
 
   @override
   State<TimelineTabView> createState() => _TimelineTabViewState();
 }
 
 class _TimelineTabViewState extends State<TimelineTabView> {
-  int _selectedStatus = 0;
-bool _emailRemindersEnabled = false;
+  late int _selectedStatus;
+  bool _emailRemindersEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedStatus = widget.isSelectionMode ? 1 : 0;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 1.h,),
+        SizedBox(height: 1.h),
+        if (widget.isSelectionMode) ...[
+          Align(
+            alignment: Alignment.centerRight,
+            child: onTap(
+              onTap: () {},
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 12.px,
+                  vertical: 4.px,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.charcoal,
+                  borderRadius: BorderRadius.circular(16.px),
+                  border: Border.all(
+                    color: AppColors.white.withValues(alpha: 0.20),
+                    width: 1.px,
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.edit_outlined,
+                      size: 11.px,
+                      color: AppColors.white,
+                    ),
+                    SizedBox(width: 4.px),
+                    CustomText(
+                      'Edit',
+                      fontSize: 10.px,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 1.h),
+        ],
+
         // Dates Row
         Row(
           children: [
@@ -38,7 +89,6 @@ bool _emailRemindersEnabled = false;
             Expanded(
               child: AppTextField(
                 hintColor: AppColors.white.withValues(alpha: 0.50),
-
                 borderColor: Colors.transparent,
                 labelGap: 1.5.h,
                 labelText: "End Date",
@@ -125,9 +175,10 @@ bool _emailRemindersEnabled = false;
               ),
             ),
             SizedBox(width: 2.2.w),
+
             // In Progress Container
             Expanded(
-              child:onTap(
+              child: onTap(
                 onTap: () => setState(() => _selectedStatus = 1),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
@@ -186,11 +237,11 @@ bool _emailRemindersEnabled = false;
             ),
           ],
         ),
-        SizedBox(height: 3.h),
+        SizedBox(height: 2.5.h),
 
         // Email Reminders Container
         Container(
-          padding: EdgeInsets.symmetric( vertical: 6.px),
+          padding: EdgeInsets.symmetric(vertical: 6.px),
           decoration: BoxDecoration(
             color: AppColors.greyDark,
             borderRadius: BorderRadius.circular(15.px),
@@ -199,7 +250,6 @@ bool _emailRemindersEnabled = false;
             children: [
               Container(
                 margin: EdgeInsets.only(left: 3.w),
-
                 padding: EdgeInsets.all(8.px),
                 decoration: BoxDecoration(
                   color: AppColors.blue.withValues(alpha: 0.10),
@@ -251,57 +301,63 @@ bool _emailRemindersEnabled = false;
             ],
           ),
         ),
-        SizedBox(height: 2.5.h),
+        SizedBox(height: widget.isSelectionMode ? 12.h : 2.5.h),
 
-        // Missing Dates Alert
-        Container(
-          padding: EdgeInsets.symmetric( vertical: 10.px),
-          decoration: BoxDecoration(
-            color: AppColors.gold.withValues(alpha: 0.08),
-            borderRadius: BorderRadius.circular(15.px),
-            border: Border.all(
-              color: AppColors.gold.withValues(alpha: 0.25),
-              width: 0.8,
+        // Missing Dates Alert (ONLY in Normal Mode)
+        if (!widget.isSelectionMode) ...[
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 10.px),
+            decoration: BoxDecoration(
+              color: AppColors.gold.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(15.px),
+              border: Border.all(
+                color: AppColors.gold.withValues(alpha: 0.25),
+                width: 0.8,
+              ),
             ),
-          ),
-          child: Row(
-            children: [
-              Container(
-
+            child: Row(
+              children: [
+                Container(
                   margin: EdgeInsets.only(left: 3.w),
-
                   padding: EdgeInsets.all(8.px),
                   decoration: BoxDecoration(
                     color: AppColors.gold.withValues(alpha: 0.10),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(Icons.info_outline, size: 16.px, color: AppColors.gold)),
-              SizedBox(width: 10.px),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      'Missing Dates',
-                      fontSize: 12.px,
-                      color: AppColors.gold,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    SizedBox(height: 2.px),
-                    CustomText(
-                      'Will be saved as Draft. Set dates and set system',
-                      fontSize: 8.px,
-                      color: AppColors.white.withValues(alpha: 0.80),
-                      maxLines: 1,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ],
+                  child: Icon(
+                    Icons.info_outline,
+                    size: 16.px,
+                    color: AppColors.gold,
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(width: 10.px),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        'Missing Dates',
+                        fontSize: 12.px,
+                        color: AppColors.gold,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      SizedBox(height: 2.px),
+                      CustomText(
+                        'Will be saved as Draft. Set dates and set system',
+                        fontSize: 8.px,
+                        color: AppColors.white.withValues(alpha: 0.80),
+                        maxLines: 1,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(height: 7.5.h,),
+        ],
+
+        SizedBox(height: widget.isSelectionMode ? 2.h : 8.5.h),
       ],
     );
   }

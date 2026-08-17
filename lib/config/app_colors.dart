@@ -43,4 +43,6 @@ class AppColors {
   static const Color greenAccent = Color(0xFF66BB6A);
   static const Color lightBlueAcc = Color(0xFF64B5F6);
   static const Color greyDarkLight = Color(0xFF4A4A4A);
+  static const Color deepIndigo = Color(0xFF1A1A2E);
+  static const Color nearBlack = Color(0xFF0A0A0F);
 }

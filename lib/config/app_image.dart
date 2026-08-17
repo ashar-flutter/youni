@@ -4,6 +4,13 @@ class AppImage {
   static const String appBackground = "assets/images/app_background.png";
   static const String universe= "assets/images/universe.png";
 
+  static const String projectAlpha= "assets/images/project_alpha.png";
+  static const String projectBeta= "assets/images/project_beta.png";
+  static const String routineAndGoal= "assets/images/routine_and_goal.png";
+
+
+
+
   // all icons
   static const String quoteIcon = "assets/icons/quote_icon.png";
   static const String audioCallIcon ="assets/icons/audio_call.png";
@@ -35,7 +42,13 @@ class AppImage {
 
 
   // all logos
+
+
   static const String youniLogo = "assets/logos/youni_logo.png";
+
+  static const String moonLogo = "assets/logos/moon_ball.png";
+  static const String satelliteLogo = "assets/logos/satellite_ball.png";
+  static const String planetLogo = "assets/logos/plannet_ball.png";
 
   static const String apple= "assets/logos/apple_logo.png";
   static const String facebook= "assets/logos/fb.png";

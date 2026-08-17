@@ -1,4 +1,4 @@
-import '../config/barrel.dart';
+import '../../config/barrel.dart';
 
 class NewEntityRow extends StatelessWidget {
   const NewEntityRow({super.key});

@@ -54,7 +54,7 @@ class Archive extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 7.w),
             padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.5.h),
             decoration: BoxDecoration(
-              color: AppColors.greyDark.withValues(alpha: 0.67),
+              color: AppColors.charcoal,
               borderRadius: BorderRadius.circular(22),
 
               border: Border.all(color: AppColors.greyDark, width: 1),
@@ -62,7 +62,6 @@ class Archive extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 1.h),
 
                 // Archive Header
                 Row(

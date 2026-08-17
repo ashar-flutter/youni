@@ -61,13 +61,13 @@ class _AddNewTaskDialogState extends State<AddNewTaskDialog> {
         physics: const BouncingScrollPhysics(),
         child: Container(
           width: 90.w,
-          padding: EdgeInsets.symmetric(horizontal: 5.w),
+          padding: EdgeInsets.symmetric(horizontal: 4.w),
           decoration: BoxDecoration(
-            color: AppColors.blue.withValues(alpha: 0.05),
-            borderRadius: BorderRadius.circular(26),
+            color: AppColors.charcoal.withValues(alpha: 0.05),
+            borderRadius: BorderRadius.circular(22),
             border: Border.all(
-              color: AppColors.white.withValues(alpha: 0.40),
-              width: 0.67,
+              color: AppColors.greyDark,
+              width: 2,
             ),
             boxShadow: [
               BoxShadow(
@@ -88,11 +88,15 @@ class _AddNewTaskDialogState extends State<AddNewTaskDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               LegalPageAppBar(
-                rightPadding: 4.2.w,
+                rightPadding: 5.2.w,
                 title: 'Add New Task',
                 subtitle: '',
                 showSubtitle: false,
                 showDivider: false,
+                topSpacing: 2.h,
+                titleFontSize: 14.9.sp,
+                backButtonSize: 6.5.w,
+                backIconSize: 2.4.w,
               ),
 
 

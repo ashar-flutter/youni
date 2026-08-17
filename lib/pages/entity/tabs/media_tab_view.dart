@@ -1,7 +1,12 @@
 import '../../../config/barrel.dart';
 
 class MediaTabView extends StatelessWidget {
-  const MediaTabView({super.key});
+  final bool isSelectionMode;
+
+  const MediaTabView({
+    super.key,
+    this.isSelectionMode = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class MediaTabView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(height: 1.h,),
+                  SizedBox(height: 1.h),
                   CustomText(
                     'Attached Files',
                     fontSize: 13.px,
@@ -39,24 +44,23 @@ class MediaTabView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.blue,
                 borderRadius: BorderRadius.circular(9.px),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.black.withValues(alpha: 0.10),
-                      offset: Offset(0, 2.71),
-                      blurRadius: 4.07,
-                      spreadRadius: -2.71,
-                    ),
-                    BoxShadow(
-                      color: AppColors.black.withValues(alpha: 0.10),
-                      offset: Offset(0, 6.78),
-                      blurRadius: 10.18,
-                      spreadRadius: -2.04,
-                    ),
-                  ],
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.black.withValues(alpha: 0.10),
+                    offset: const Offset(0, 2.71),
+                    blurRadius: 4.07,
+                    spreadRadius: -2.71,
+                  ),
+                  BoxShadow(
+                    color: AppColors.black.withValues(alpha: 0.10),
+                    offset: const Offset(0, 6.78),
+                    blurRadius: 10.18,
+                    spreadRadius: -2.04,
+                  ),
+                ],
                 border: Border.all(
                   color: AppColors.white.withValues(alpha: 0.05),
-
-                )
+                ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -75,20 +79,98 @@ class MediaTabView extends StatelessWidget {
 
         SizedBox(height: 4.h),
 
-        // Attachment Area
+        // Attachment Area Container
         Container(
           margin: EdgeInsets.symmetric(horizontal: 2.w),
           height: 180.px,
           width: double.infinity,
+          clipBehavior: Clip.antiAlias, // Ensures clean rounded clipping
           decoration: BoxDecoration(
             color: AppColors.greyDark,
             borderRadius: BorderRadius.circular(20.px),
             border: Border.all(
-              color: AppColors.white.withValues(alpha: 0.05),
-              width: 2
-            )
+              color: AppColors.white.withValues(alpha: 0.08), // Soft border to fix double edge
+              width: 1.5.px,
+            ),
           ),
-          child: Column(
+          child: isSelectionMode
+              ? ClipRRect(
+            borderRadius: BorderRadius.circular(18.px),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                // Network Image
+                Image.network(
+                  'https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=1000&auto=format&fit=crop',
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: AppColors.greyDark,
+                      child: Center(
+                        child: Icon(
+                          Icons.picture_as_pdf_rounded,
+                          size: 40.px,
+                          color: AppColors.white.withValues(alpha: 0.5),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                // Smooth Gradient Overlay
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        AppColors.black.withValues(alpha: 0.15),
+                        AppColors.black.withValues(alpha: 0.60),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // PDF Tag Indicator
+                Positioned(
+                  bottom: 12.px,
+                  left: 12.px,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10.px,
+                      vertical: 5.px,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.charcoal.withValues(alpha: 0.85),
+                      borderRadius: BorderRadius.circular(8.px),
+                      border: Border.all(
+                        color: AppColors.white.withValues(alpha: 0.15),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.picture_as_pdf_rounded,
+                          size: 14.px,
+                          color: AppColors.red,
+                        ),
+                        SizedBox(width: 6.px),
+                        CustomText(
+                          'Document_Preview.pdf',
+                          fontSize: 10.px,
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+              : Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
@@ -118,7 +200,8 @@ class MediaTabView extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 15.5.h,),
+
+        SizedBox(height: 15.5.h),
       ],
     );
   }

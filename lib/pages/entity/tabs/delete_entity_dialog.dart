@@ -1,26 +1,24 @@
 import '../../../config/barrel.dart';
 
-enum SettingPopUpType { logout, deleteAccount, cancelSubscription }
-
-class SettingPopUp extends StatelessWidget {
-  final SettingPopUpType type;
+class DeleteEntityDialog extends StatelessWidget {
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
 
-  const SettingPopUp({
+  const DeleteEntityDialog({
     super.key,
-    required this.type,
     required this.onConfirm,
     this.onCancel,
   });
 
   static Future<void> show({
-    required SettingPopUpType type,
     required VoidCallback onConfirm,
     VoidCallback? onCancel,
   }) {
     return Get.dialog(
-      SettingPopUp(type: type, onConfirm: onConfirm, onCancel: onCancel),
+      DeleteEntityDialog(
+        onConfirm: onConfirm,
+        onCancel: onCancel,
+      ),
       barrierColor: AppColors.dark.withValues(alpha: 0.90),
       transitionCurve: Curves.easeInOut,
       transitionDuration: const Duration(milliseconds: 250),
@@ -29,12 +27,6 @@ class SettingPopUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String title = _getTitle();
-    final String subtitle = _getSubtitle();
-    final String confirmText = _getConfirmText();
-    final String cancelText = _getCancelText();
-    final bool isRedOnLeft = type != SettingPopUpType.cancelSubscription;
-
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.symmetric(horizontal: 7.w),
@@ -56,7 +48,7 @@ class SettingPopUp extends StatelessWidget {
 
             // Title
             CustomText(
-              title,
+              'Are you absolutely sure?',
               fontSize: 18.sp,
               fontWeight: FontWeight.w700,
             ),
@@ -66,31 +58,27 @@ class SettingPopUp extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 2.w),
               child: CustomText(
-                subtitle,
+                'If you delete a star all entities within will be deleted.',
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w400,
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 3.2.h),
+            SizedBox(height: 3.h),
 
-            // Conditional Action Buttons Row
+            // Action Buttons Row
             Row(
               children: [
                 Expanded(
-                  child: isRedOnLeft
-                      ? _buildRedButton(confirmText)
-                      : _buildSecondaryButton(cancelText),
+                  child: _buildRedButton('Cancel'),
                 ),
                 SizedBox(width: 3.w),
                 Expanded(
-                  child: isRedOnLeft
-                      ? _buildSecondaryButton(cancelText)
-                      : _buildRedButton(confirmText),
+                  child: _buildSecondaryButton('Delete Entity'),
                 ),
               ],
             ),
-            SizedBox(height: 0.7.h),
+            SizedBox(height: 1.5.h),
           ],
         ),
       ),
@@ -113,7 +101,7 @@ class SettingPopUp extends StatelessWidget {
     );
   }
 
-  // Secondary Button (Cancel / Stay)
+  // Secondary Button (Cancel)
   Widget _buildSecondaryButton(String text) {
     return AppButton(
       height: 42.px,
@@ -123,52 +111,9 @@ class SettingPopUp extends StatelessWidget {
       borderColor: AppColors.white,
       textColor: AppColors.white,
       onPressed: () {
-        Get.back(); // Close Dialog
+        Get.back();
         if (onCancel != null) onCancel!();
       },
     );
-  }
-
-  // Text Resolvers
-  String _getTitle() {
-    switch (type) {
-      case SettingPopUpType.logout:
-        return 'Logout';
-      case SettingPopUpType.deleteAccount:
-        return 'Delete Account';
-      case SettingPopUpType.cancelSubscription:
-        return 'Cancel Subscription';
-    }
-  }
-
-  String _getSubtitle() {
-    switch (type) {
-      case SettingPopUpType.logout:
-        return 'Are you sure you want to logout?';
-      case SettingPopUpType.deleteAccount:
-        return 'Are you sure you want to delete account permanently?';
-      case SettingPopUpType.cancelSubscription:
-        return 'Are you sure you want to cancel your subscription?\nYou will be downgraded to the free plan at the end of billing period.';
-    }
-  }
-
-  String _getConfirmText() {
-    switch (type) {
-      case SettingPopUpType.logout:
-        return 'Yes, Logout';
-      case SettingPopUpType.deleteAccount:
-        return 'Yes, Delete';
-      case SettingPopUpType.cancelSubscription:
-        return 'Downgrade';
-    }
-  }
-
-  String _getCancelText() {
-    switch (type) {
-      case SettingPopUpType.cancelSubscription:
-        return 'Stay';
-      default:
-        return 'Cancel';
-    }
   }
 }

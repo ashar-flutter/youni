@@ -69,7 +69,7 @@ class TreeView extends StatelessWidget {
         children: [
           const MainAppBar(showPremiumAndFeatures: false),
 
-          SizedBox(height: 2.h),
+          SizedBox(height: 3.h),
 
           const NewEntityRow(),
 
@@ -383,11 +383,11 @@ class _MapNode extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             boxShadow: showGlow
                 ? [
-                    BoxShadow(
-                      color: data.color.withValues(alpha: 0.20),
-                      blurRadius: 18.6,
-                      spreadRadius: 0,
-                    ),
+              BoxShadow(
+                color: data.color.withValues(alpha: 0.13),
+                blurRadius: 10,
+                spreadRadius: 0,
+              ),
                   ]
                 : [],
           ),

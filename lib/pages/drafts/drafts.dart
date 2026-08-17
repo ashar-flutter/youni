@@ -4,7 +4,7 @@ class Drafts extends StatelessWidget {
   const Drafts({super.key});
 
   // Toggle this to preview the empty-state vs the populated-state.
-  static const bool _hasDrafts = true;
+  static const bool _hasDrafts = false;
 
   static const List<Map<String, dynamic>> _drafts = [
     {
@@ -40,7 +40,7 @@ class Drafts extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 7.w),
             padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.5.h),
             decoration: BoxDecoration(
-              color: AppColors.greyDark.withValues(alpha: 0.67),
+              color: AppColors.charcoal,
               borderRadius: BorderRadius.circular(22),
               border: Border.all(color: AppColors.greyDark, width: 1),
             ),

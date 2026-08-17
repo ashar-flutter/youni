@@ -2,16 +2,13 @@
 export 'package:flutter/material.dart';
 export 'package:flutter/gestures.dart';
 
-
-
-// getX -
+// getX
 export 'package:get/get.dart' hide ScreenType;
-
 
 // controllers
 export 'package:youni/controllers/ui_controller.dart';
 
-
+// models
 
 // responsive sizer
 export 'package:responsive_sizer/responsive_sizer.dart';
@@ -19,13 +16,13 @@ export 'package:responsive_sizer/responsive_sizer.dart';
 // screens
 export 'package:youni/splash.dart';
 export 'package:youni/bottom_nav_bar.dart';
-export'package:youni/main_layout.dart';
+export 'package:youni/main_layout.dart';
 
 export 'package:youni/account_subscription.dart';
 export 'package:youni/pages/terms_and_conditions.dart';
 export 'package:youni/pages/privacy_policy.dart';
 export 'package:youni/pages/contact_us.dart';
-export 'package:youni/pages/new_entity_row.dart';
+export 'package:youni/pages/entity/new_entity_row.dart';
 export 'package:youni/pages/universe/universe.dart';
 export 'package:youni/pages/archive/archive.dart';
 export 'package:youni/pages/settings/setting.dart';
@@ -37,7 +34,7 @@ export 'package:youni/pages/settings/account_info.dart';
 export 'package:youni/pages/drafts/drafts.dart';
 export 'package:youni/pages/to_do_list/to_do_list.dart';
 export 'package:youni/pages/tree_view/tree_view.dart';
-export'package:youni/pages/to_do_list/to_do_cards.dart';
+export 'package:youni/pages/to_do_list/to_do_cards.dart';
 export 'package:youni/pages/to_do_list/recurring_card.dart';
 export 'package:youni/pages/to_do_list/active_card.dart';
 export 'package:youni/pages/to_do_list/completed_card.dart';
@@ -48,20 +45,31 @@ export 'package:youni/pages/entity/tabs/general_tab_view.dart';
 export 'package:youni/pages/entity/tabs/media_tab_view.dart';
 export 'package:youni/pages/entity/tabs/notes_tab_view.dart';
 export 'package:youni/pages/entity/tabs/timeline_tab_view.dart';
+export 'package:youni/pages/entity/entity_selection_box.dart';
 export 'package:youni/pages/entity/tabs/to_do_list_tab_view.dart';
+export 'package:youni/pages/universe/initial/welcome_universe_dialog.dart';
+export 'package:youni/pages/entity/tabs/delete_entity_dialog.dart';
 
 
 
+
+
+// orbit diagram export without class conflict
+export 'package:youni/pages/universe/initial/orbit_diagram.dart' hide OrbitBody;
+export  'package:youni/pages/universe/universe_orbit_diagram.dart';
+export  'package:youni/pages/universe/universe_legend_and_timebar.dart';
+
+// auth
 export 'package:youni/pages/auth/login.dart';
 export 'package:youni/pages/auth/register.dart';
 export 'package:youni/pages/auth/new_password.dart';
 export 'package:youni/pages/auth/reset_password.dart';
 export 'package:youni/pages/auth/reset_password_sent.dart';
 
-//google fonts
+// google fonts
 export 'package:google_fonts/google_fonts.dart';
 
-//config
+// config
 export 'package:youni/config/app_colors.dart';
 export 'package:youni/config/app_image.dart';
 
@@ -81,4 +89,3 @@ export 'package:youni/widgets/lunar_card.dart';
 export 'package:youni/widgets/popular_card.dart';
 export 'package:youni/widgets/plan_button.dart';
 export 'package:youni/widgets/task_card_widgets.dart';
-
